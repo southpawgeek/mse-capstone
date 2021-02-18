@@ -12,7 +12,7 @@ create table user(
     phone_1 varchar(20),
     phone_2 varchar(20),
     phone_3 varchar(20),
-    creation_date timestamp,
+    creation_date timestamp not null default current_timestamp,
     primary key (id)
 );
 
@@ -56,10 +56,10 @@ create table author(
 
 create table audit(
     id int not null auto_increment,
-    actor_id int,
+    actor_user varchar(75),
     action varchar(10),
-    target_id int,
+    target_user varchar(75),
     copy_id int,
-    action_date timestamp,
+    action_date timestamp not null default current_timestamp,
     primary key (id)
 );
