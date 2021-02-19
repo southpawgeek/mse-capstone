@@ -1,4 +1,4 @@
-package edu.brandeis.gps.rseg127.lms.controller;
+package edu.brandeis.gps.rseg127.lms.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

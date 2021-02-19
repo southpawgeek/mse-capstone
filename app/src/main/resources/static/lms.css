@@ -9,7 +9,7 @@ a {
     color: #fcdab7;
 }
 
-header, main, footer {
+header, nav, main, footer {
     margin: auto;
     width: 90%;
     max-width: 55rem;
@@ -23,6 +23,11 @@ header, footer {
 header {
     height: 4rem;
     text-align: center;
+}
+
+nav {
+    padding: 0.25rem 1rem;
+    background: rgb(5, 29, 51);
 }
 
 footer {
@@ -43,4 +48,12 @@ section {
     padding: 0.5rem;
     border: 1px solid #30778f;
 
+}
+
+table {
+    width: 100%;
+}
+
+thead {
+    text-align: left;
 }

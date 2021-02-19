@@ -1,0 +1,23 @@
+{{>header}}
+    <h2>Audit Log</h2>
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Actor ID</th>
+            <th>Action</th>
+            <th>Target ID</th>
+            <th>Copy ID</th>
+            <th>Timestamp</th>
+        </thead>
+        <tbody>
+            {{#audits}}<tr>
+            <td>{{id}}</td>
+            <td>{{actor_user}}</td>
+            <td>{{action}}</td>
+            <td>{{#target_user}}{{.}}{{/target_user}}</td>
+            <td>{{#copy_id}}{{.}}{{/copy_id}}</td>
+            <td>{{action_date}}</td>
+            {{/audits}}</tr>
+        </tbody>
+    </table>
+{{>footer}}
