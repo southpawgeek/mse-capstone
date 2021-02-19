@@ -29,4 +29,10 @@ public class WebController {
         model.addAttribute("users", users);
         return "users";
     }
+
+    @GetMapping("/login")
+    public String loginPage(Model model) {
+        model.addAttribute("message", "Told you this wasn't implemented.");
+        return "index";
+    }
 }
