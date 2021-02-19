@@ -1,5 +1,28 @@
 {{>header}}
     <section>
+    <h2>Add New User [NYI]</h2>
+    <h3>Username *</h3>
+    <input type="text" />
+    <h3>Email</h3>
+    <input type="text" />
+    <h3>First Name *</h3>
+    <input type="text" />
+    <h3>Middle Name</h3>
+    <input type="text" />
+    <h3>Last Name</h3>
+    <input type="text" />
+    <h3>User Type *</h3>
+    <label class="radio-label" for="patron">
+        <input id="patron" name="type" type="radio" value="patron" checked />
+        Patron</label>
+    <label class="radio-label" for="librarian">
+        <input id="librarian" name="type" type="radio" value="librarian" />
+        Librarian</label>
+    <p class="tiny">* Required</p>
+    <hr class="invis" />
+    <button>Add User</button>
+    </section>
+    <section>
         <h2>User List</h2>
         <table>
             <thead>

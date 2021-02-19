@@ -1,0 +1,31 @@
+{{>header}}
+    <section>
+    <h2>Add New Asset [NYI]</h2>
+    <h3>Title *</h3>
+    <input type="text" />
+    <h3>ISBN *</h3>
+    <input type="text" />
+    <h3>Call Number *</h3>
+    <input type="text" />
+    <p class="tiny">* Required</p>
+    <hr class="invis" />
+    <button>Add Asset</button>
+    </section>
+    <section>
+        <h2>Asset List</h2>
+        <table>
+            <thead>
+                <th>Title</th>
+                <th>ISBN</th>
+                <th>Call Number</th>
+            </thead>
+            <tbody>
+                {{#assets}}<tr>
+                <td>{{title}}</td>
+                <td>{{isbn}}</td>
+                <td>{{call_number}}</td>
+                {{/assets}}</tr>
+            </tbody>
+        </table>
+    </section>
+{{>footer}}

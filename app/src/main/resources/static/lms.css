@@ -1,40 +1,67 @@
+:root {
+    --lite-red: rgb(255, 133, 139);
+    --lite-orange: rgb(255, 172, 151);
+    --lite-yellow: rgb(255, 249, 162);
+    --lite-green: rgb(40, 238, 182);
+    --lite-blue: rgb(43, 232, 241);
+    --lite-purple: rgb(194, 163, 255);
+    --lite-grey: rgb(236, 240, 243);
+
+    --dark-grey-max: rgb(48, 54, 65);
+    --dark-grey-mid: rgb(60, 68, 82);
+    --dark-grey-min: rgb(73, 81, 93);
+
+    --dark-black-max: rgb(10, 13, 15);
+    --dark-black-mid: rgb(28, 33, 37);
+    --dark-black-min: rgb(34, 42, 51);
+}
+
 body {
-    background: rgb(60, 68, 82);
-    color: rgb(206, 212, 218);
+    background: var(--dark-grey-min);
+    color: var(--lite-grey);
     font-family: Barlow, sans-serif;
-    font-weight: 100;
+    font-weight: 200;
     margin: 0;
-    text-shadow: 1px 1px 1px rgb(5 8 11);
+    text-shadow: 1px 1px 1px var(--dark-black-max);
 }
 
 a {
-    color: rgb(249, 150, 124);
+    color: var(--lite-orange);
     text-decoration: none;
     font-weight: 500;
 }
 
-header, main, footer {
+header,
+main,
+footer {
     margin: 0 0 0 8rem;
 }
 
-header, footer {
-    padding: 1rem;
-    background: rgb(48, 54, 65);
+header,
+footer {
+    padding: 0.5rem;
+    background: var(--dark-grey-max);
 }
 
 header {
-    height: 3rem;
+    min-height: 3rem;
     text-align: center;
 }
 
-h1, h2, h3, h4, h5 { margin: 0 0 0.5rem; }
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin: 0.5rem 0;
+}
 
 aside {
     height: 100vh;
     width: 8rem;
     position: fixed;
     top: 0;
-    background: rgb(53, 60, 72);
+    background: var(--dark-grey-mid);
 }
 
 #current-user {
@@ -42,22 +69,22 @@ aside {
 }
 
 #current-user a {
-    color: rgb(245, 219, 212);
+    color: var(--lite-yellow);
     font-size: 0.8rem;
 }
 
 #user-initial {
-margin: 1rem auto 0;
-width: 1rem;
-height: 1rem;
-padding: 1rem;
-background: rgba(70, 55, 99, 0.5);
-border-radius: 50%;
-font-size: 2rem;
-line-height: 0.5rem;
-font-weight: 900;
-box-shadow: 1px 1px 1px #69a03c,
--1px -1px 1px #377b82
+    margin: 1rem auto 0;
+    width: 1rem;
+    height: 1rem;
+    padding: 1rem;
+    background: #312444;
+    border-radius: 50%;
+    font-size: 2rem;
+    line-height: 0.5rem;
+    font-weight: 900;
+    box-shadow: 1px 1px 1px var(--lite-green),
+        -1px -1px 1px var(--lite-blue)
 }
 
 
@@ -88,8 +115,8 @@ main {
 }
 
 section {
-    padding: 0.5rem;
-    background: rgb(52, 59, 71);
+    padding: 1rem;
+    background: var(--dark-grey-mid);
     margin: 1rem 0;
 }
 
@@ -101,10 +128,48 @@ thead {
     text-align: left;
 }
 
-/* just some nice background colors */
-.nice-red-bg { background-color: rgb(226, 117, 122); }
-.nice-orange-bg { background-color: rgb(249, 150, 124); }
-.nice-yellow-bg { background-color: rgb(226, 211, 143); }
-.nice-green-bg { background-color: rgb(30, 193, 147); }
-.nice-blue-bg { background-color: rgb(32, 192, 199); }
-.nice-purple-bg { background-color: rgb(171, 143, 226); }
+input, button, .radio-label {
+    border: none;
+    font-family: Barlow, sans-serif;
+    border-radius: 1rem;
+    padding: 0.25rem 0.75rem;
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+}
+
+input, .radio-label {
+    font-weight: 100;
+    color: var(--lite-grey);
+    background: var(--dark-black-min);
+}
+
+button {
+    font-weight: 300;
+    color: var(--dark-black-min);
+    background: var(--lite-purple);
+    box-shadow: 1px 1px 1px var(--dark-black-min);
+}
+
+button:focus, input:focus {
+    outline: 0;
+}
+
+input:focus {
+    background: var(--dark-black-mid);
+}
+
+button:hover {
+    background: var(--lite-blue);
+}
+
+button:active {
+    background: var(--lite-yellow);
+}
+
+hr.invis {
+    border: none;
+}
+
+.tiny {
+    font-size: 0.7rem;
+}
