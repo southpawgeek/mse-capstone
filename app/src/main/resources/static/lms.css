@@ -1,33 +1,81 @@
 body {
-    background: #1d2d50;
-    color: white;
-    font-family: sans-serif;
+    background: rgb(60, 68, 82);
+    color: rgb(206, 212, 218);
+    font-family: Barlow, sans-serif;
+    font-weight: 100;
     margin: 0;
+    text-shadow: 1px 1px 1px rgb(5 8 11);
 }
 
 a {
-    color: #fcdab7;
+    color: rgb(249, 150, 124);
+    text-decoration: none;
+    font-weight: 500;
 }
 
-header, nav, main, footer {
-    margin: auto;
-    width: 90%;
-    max-width: 55rem;
+header, main, footer {
+    margin: 0 0 0 8rem;
 }
 
 header, footer {
     padding: 1rem;
-    background: #133b5c;
+    background: rgb(48, 54, 65);
 }
 
 header {
-    height: 4rem;
+    height: 3rem;
     text-align: center;
 }
 
+h1, h2, h3, h4, h5 { margin: 0 0 0.5rem; }
+
+aside {
+    height: 100vh;
+    width: 8rem;
+    position: fixed;
+    top: 0;
+    background: rgb(53, 60, 72);
+}
+
+#current-user {
+    text-align: center;
+}
+
+#current-user a {
+    color: rgb(245, 219, 212);
+    font-size: 0.8rem;
+}
+
+#user-initial {
+margin: 1rem auto 0;
+width: 1rem;
+height: 1rem;
+padding: 1rem;
+background: rgba(70, 55, 99, 0.5);
+border-radius: 50%;
+font-size: 2rem;
+line-height: 0.5rem;
+font-weight: 900;
+box-shadow: 1px 1px 1px #69a03c,
+-1px -1px 1px #377b82
+}
+
+
 nav {
     padding: 0.25rem 1rem;
-    background: rgb(5, 29, 51);
+}
+
+nav ul {
+    padding: 0;
+    list-style-type: none;
+}
+
+nav li {
+    padding: 0.25rem 0;
+}
+
+nav i {
+    width: 1.5rem;
 }
 
 footer {
@@ -35,19 +83,14 @@ footer {
     text-align: right;
 }
 
-h1 {
-    display: inline-block;
-}
-
 main {
-    padding: 1rem;
-    background-color: #1e5f74;
+    padding: 0 1rem;
 }
 
 section {
     padding: 0.5rem;
-    border: 1px solid #30778f;
-
+    background: rgb(52, 59, 71);
+    margin: 1rem 0;
 }
 
 table {
@@ -57,3 +100,11 @@ table {
 thead {
     text-align: left;
 }
+
+/* just some nice background colors */
+.nice-red-bg { background-color: rgb(226, 117, 122); }
+.nice-orange-bg { background-color: rgb(249, 150, 124); }
+.nice-yellow-bg { background-color: rgb(226, 211, 143); }
+.nice-green-bg { background-color: rgb(30, 193, 147); }
+.nice-blue-bg { background-color: rgb(32, 192, 199); }
+.nice-purple-bg { background-color: rgb(171, 143, 226); }

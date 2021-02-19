@@ -1,21 +1,23 @@
 {{>header}}
-    <h2>User List</h2>
-    <table>
-        <thead>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Patron ID</th>
-            <th>Name</th>
-            <th>Email</th>
-        </thead>
-        <tbody>
-            {{#users}}<tr>
-            <td>{{id}}</td>
-            <td>{{username}}</td>
-            <td>{{patron_id}}</td>
-            <td>{{#last_name}}{{.}},{{/last_name}}{{first_name}} {{#middle_name}}{{.}}{{/middle_name}}</td>
-            <td>{{#email_address}}{{.}}{{/email_address}}</td>
-            {{/users}}</tr>
-        </tbody>
-    </table>
+    <section>
+        <h2>User List</h2>
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Patron ID</th>
+                <th>Name</th>
+                <th>Email</th>
+            </thead>
+            <tbody>
+                {{#users}}<tr>
+                <td>{{id}}</td>
+                <td>{{username}}</td>
+                <td>{{patron_id}}</td>
+                <td>{{#last_name}}{{.}},{{/last_name}}{{first_name}} {{#middle_name}}{{.}}{{/middle_name}}</td>
+                <td>{{#email_address}}{{.}}{{/email_address}}</td>
+                {{/users}}</tr>
+            </tbody>
+        </table>
+    </section>
 {{>footer}}
