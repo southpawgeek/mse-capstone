@@ -23,6 +23,6 @@ public class AuthorService {
     }
 
     public Author getAuthor(Integer id) {
-        return authorRepo.getOne(id);
+        return authorRepo.findById(id).get();
     }
 }

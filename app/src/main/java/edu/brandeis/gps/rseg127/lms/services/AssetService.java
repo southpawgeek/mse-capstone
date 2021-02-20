@@ -23,6 +23,6 @@ public class AssetService {
     }
 
     public Asset getAsset(Integer id) {
-        return assetRepo.getOne(id);
+        return assetRepo.findById(id).get();
     }
 }

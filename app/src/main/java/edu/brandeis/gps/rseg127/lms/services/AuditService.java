@@ -23,6 +23,6 @@ public class AuditService {
     }
 
     public Audit getAudit(Integer id) {
-        return auditRepo.getOne(id);
+        return auditRepo.findById(id).get();
     }
 }

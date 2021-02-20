@@ -22,7 +22,11 @@ public class UserService {
         return userRepo.save(user);
     }
 
+    public User updateUser(User user) {
+        return userRepo.save(user);
+    }
+
     public User getUser(Integer id) {
-        return userRepo.getOne(id);
+        return userRepo.findById(id).get();
     }
 }
