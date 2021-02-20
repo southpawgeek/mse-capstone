@@ -22,7 +22,15 @@ public class AssetService {
         return assetRepo.save(asset);
     }
 
+    public Asset updateAsset(Asset asset) {
+        return assetRepo.save(asset);
+    }
+
     public Asset getAsset(Integer id) {
         return assetRepo.findById(id).get();
+    }
+
+    public void deleteAsset(Integer id) {
+        assetRepo.deleteById(id);
     }
 }
