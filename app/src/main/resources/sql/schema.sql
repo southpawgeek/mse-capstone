@@ -1,6 +1,6 @@
 create table user(
     id int not null auto_increment,
-    username varchar(75) not null,
+    username varchar(75) not null unique,
     password_hash varchar(32) not null,
     patron_id varchar(32) not null,
     first_name varchar(75) not null,
