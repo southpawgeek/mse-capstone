@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import edu.brandeis.gps.rseg127.lms.entities.Asset;
+import edu.brandeis.gps.rseg127.lms.entities.Audit;
 import edu.brandeis.gps.rseg127.lms.entities.User;
 import edu.brandeis.gps.rseg127.lms.services.AssetService;
+import edu.brandeis.gps.rseg127.lms.services.AuditService;
 import edu.brandeis.gps.rseg127.lms.services.UserService;
 
 @Controller
@@ -44,5 +46,15 @@ public class WebController {
     public String loginPage(Model model) {
         model.addAttribute("message", "Told you this wasn't implemented.");
         return "index";
+    }
+
+    @Autowired
+    private AuditService auditService;
+
+    @GetMapping("/audit-log")
+    public String getAllAudit(Model model) {
+        List<Audit> audits = auditService.getAllAudits();
+        model.addAttribute("audits", audits);
+        return "audit-log";
     }
 }
