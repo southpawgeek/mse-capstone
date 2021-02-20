@@ -29,4 +29,8 @@ public class UserService {
     public User getUser(Integer id) {
         return userRepo.findById(id).get();
     }
+
+    public void deleteUser(Integer id) {
+        userRepo.deleteById(id);
+    }
 }
