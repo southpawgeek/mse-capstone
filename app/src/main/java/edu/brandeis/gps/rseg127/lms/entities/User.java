@@ -51,8 +51,8 @@ public class User {
     @Column(name="phone2")
     private String phone2;
 
-    @Column(name="phone_3")
-    private String phone_3;
+    @Column(name="phone3")
+    private String phone3;
 
     @Column(name="creation_date")
     private Timestamp creation_date;

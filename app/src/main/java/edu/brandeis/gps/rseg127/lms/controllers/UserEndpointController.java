@@ -33,7 +33,7 @@ public class UserEndpointController {
 
         // fill in the blanks with submitted data
         //some things cannot be updated:
-        // id, username, patron_id, creation_date
+        // id, username, user_type, patron_id, creation_date
         updated_user.setPassword_hash(user.getPassword_hash());
         updated_user.setFirst_name(user.getFirst_name());
         updated_user.setMiddle_name(user.getMiddle_name());
@@ -43,8 +43,7 @@ public class UserEndpointController {
         updated_user.setEmail_address(user.getEmail_address());
         updated_user.setPhone1(user.getPhone1());
         updated_user.setPhone2(user.getPhone2());
-        // no idea why lombok did this??
-        updated_user.setPhone_3(user.getPhone_3());
+        updated_user.setPhone3(user.getPhone3());
 
         return new ResponseEntity<>(userService.updateUser(updated_user), HttpStatus.CREATED);
     }
