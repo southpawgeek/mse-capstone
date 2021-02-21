@@ -173,3 +173,13 @@ hr.invis {
 .tiny {
     font-size: 0.7rem;
 }
+
+#message {
+    padding: 0.5rem;
+    color: var(--dark-black-max);
+    text-shadow: none;
+    font-weight: 200;
+}
+
+.good { background-color: var(--lite-green); }
+.bad { background-color: var(--lite-red); }

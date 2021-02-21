@@ -1,19 +1,20 @@
 {{>header}}
     <section>
-    <h2>Add New Asset [NYI]</h2>
+    <h2>Add New Asset</h2>
+    <p id="message" style="display:none;"></p>
     <h3>Title *</h3>
-    <input type="text" />
+    <input id="title" type="text" />
     <h3>ISBN *</h3>
-    <input type="text" />
+    <input id="isbn" type="text" />
     <h3>Call Number *</h3>
-    <input type="text" />
+    <input id="call-number" type="text" />
     <p class="tiny">* Required</p>
     <hr class="invis" />
-    <button>Add Asset</button>
+    <button id="add-asset">Add Asset</button>
     </section>
     <section>
         <h2>Asset List</h2>
-        <table>
+        <table id="assets">
             <thead>
                 <th>Title</th>
                 <th>ISBN</th>
