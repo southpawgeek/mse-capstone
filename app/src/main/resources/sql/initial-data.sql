@@ -1,7 +1,7 @@
-insert into user (username, password_hash, patron_id, first_name, email_address) values
-("admin", "5f4dcc3b5aa765d61d8327deb882cf99", "A1234", "Administrator", "admin@example.com"),
-("librarian", "5f4dcc3b5aa765d61d8327deb882cf99", "L2345", "Librarian", "librarian@example.com"),
-("patron", "5f4dcc3b5aa765d61d8327deb882cf99", "P3456", "Patron", "patron@example.com")
+insert into user (username, user_type, password_hash, patron_id, first_name, email_address) values
+("admin", "ADM", "5f4dcc3b5aa765d61d8327deb882cf99", "A1234", "Administrator", "admin@example.com"),
+("librarian", "LIB", "5f4dcc3b5aa765d61d8327deb882cf99", "L2345", "Librarian", "librarian@example.com"),
+("patron", "PAT", "5f4dcc3b5aa765d61d8327deb882cf99", "P3456", "Patron", "patron@example.com")
 ;
 
 
