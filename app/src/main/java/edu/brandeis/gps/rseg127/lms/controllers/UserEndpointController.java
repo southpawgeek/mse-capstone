@@ -34,13 +34,13 @@ public class UserEndpointController {
         // fill in the blanks with submitted data
         //some things cannot be updated:
         // id, username, user_type, patron_id, creation_date
-        updated_user.setPassword_hash(user.getPassword_hash());
-        updated_user.setFirst_name(user.getFirst_name());
-        updated_user.setMiddle_name(user.getMiddle_name());
-        updated_user.setLast_name(user.getLast_name());
-        updated_user.setHome_address(user.getHome_address());
-        updated_user.setMail_address(user.getMail_address());
-        updated_user.setEmail_address(user.getEmail_address());
+        updated_user.setPasswordHash(user.getPasswordHash());
+        updated_user.setFirstName(user.getFirstName());
+        updated_user.setMiddleName(user.getMiddleName());
+        updated_user.setLastName(user.getLastName());
+        updated_user.setHomeAddress(user.getHomeAddress());
+        updated_user.setMailAddress(user.getMailAddress());
+        updated_user.setEmailAddress(user.getEmailAddress());
         updated_user.setPhone1(user.getPhone1());
         updated_user.setPhone2(user.getPhone2());
         updated_user.setPhone3(user.getPhone3());

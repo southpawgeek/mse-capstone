@@ -19,17 +19,17 @@ public class Audit {
     private Integer id;
 
     @Column(name="actor_user")
-    private String actor_user;
+    private String actorUser;
 
     @Column(name="action")
     private String action;
 
     @Column(name="target_user")
-    private String target_user;
+    private String targetUser;
 
     @Column(name="copy_id")
-    private Integer copy_id;
+    private Integer copyId;
 
     @Column(name="action_date")
-    private Timestamp action_date;
+    private Timestamp actionDate;
 }

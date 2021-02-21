@@ -1,7 +1,5 @@
 package edu.brandeis.gps.rseg127.lms.entities;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,5 +23,5 @@ public class Asset {
     private String isbn;
 
     @Column(name="call_number")
-    private String call_number;
+    private String callNumber;
 }

@@ -34,7 +34,7 @@ public class AssetEndpointController {
         // fill in the blanks with submitted data
         updated_asset.setTitle(asset.getTitle());
         updated_asset.setIsbn(asset.getIsbn());
-        updated_asset.setCall_number(asset.getCall_number());
+        updated_asset.setCallNumber(asset.getCallNumber());
 
         return new ResponseEntity<>(assetService.updateAsset(updated_asset), HttpStatus.CREATED);
     }

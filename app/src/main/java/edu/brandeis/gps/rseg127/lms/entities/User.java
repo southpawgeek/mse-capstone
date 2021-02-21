@@ -21,29 +21,32 @@ public class User {
     @Column(name="username")
     private String username;
 
+    @Column(name = "user_type")
+    private String userType;
+
     @Column(name="password_hash")
-    private String password_hash;
+    private String passwordHash;
 
     @Column(name="patron_id")
-    private String patron_id;
+    private String patronId;
 
     @Column(name="first_name")
-    private String first_name;
+    private String firstName;
 
     @Column(name="middle_name")
-    private String middle_name;
+    private String middleName;
 
     @Column(name="last_name")
-    private String last_name;
+    private String lastName;
 
     @Column(name="home_address")
-    private String home_address;
+    private String homeAddress;
 
     @Column(name="mail_address")
-    private String mail_address;
+    private String mailAddress;
 
     @Column(name="email_address")
-    private String email_address;
+    private String emailAddress;
 
     @Column(name="phone1")
     private String phone1;
@@ -55,5 +58,5 @@ public class User {
     private String phone3;
 
     @Column(name="creation_date")
-    private Timestamp creation_date;
+    private Timestamp creationDate;
 }

@@ -7,7 +7,7 @@
         var mydata = {};
         if (title != "") { mydata.title = title; }
         if (isbn != "") { mydata.isbn = isbn; }
-        if (callnum != "") { mydata.call_number = callnum; }
+        if (callnum != "") { mydata.callNumber = callnum; }
 
         console.log(mydata);
         fetch("/api/assets", {
@@ -49,7 +49,7 @@ function refreshAssets() {
             $("#assets").empty();
             $.each(data, function (key) {
                 $("#assets").append(
-                    "<tr><td>" + data[key].title + "</td> <td>" + data[key].isbn + "</td> <td>" + data[key].call_number + "</td></tr>"
+                    "<tr><td>" + data[key].title + "</td> <td>" + data[key].isbn + "</td> <td>" + data[key].callNumber + "</td></tr>"
                 )
             });
         }))
