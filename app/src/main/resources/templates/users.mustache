@@ -1,30 +1,36 @@
 {{>header}}
     <section>
-    <h2>Add New User [NYI]</h2>
+    <h2>Add New User</h2>
+    <p id="message" style="display:none;"></p>
     <h3>Username *</h3>
-    <input type="text" />
+    <input id="username" type="text" />
+    <h3>Password *</h3>
+    <input id="password-hash" type="password" />
     <h3>Email</h3>
-    <input type="text" />
+    <input id="email" type="text" />
     <h3>First Name *</h3>
-    <input type="text" />
+    <input id="first-name" type="text" />
     <h3>Middle Name</h3>
-    <input type="text" />
+    <input id="middle-name" type="text" />
     <h3>Last Name</h3>
-    <input type="text" />
+    <input id="last-name" type="text" />
     <h3>User Type *</h3>
     <label class="radio-label" for="patron">
-        <input id="patron" name="type" type="radio" value="patron" checked />
+        <input id="patron" name="user-type" type="radio" value="PAT" checked />
         Patron</label>
     <label class="radio-label" for="librarian">
-        <input id="librarian" name="type" type="radio" value="librarian" />
+        <input id="librarian" name="user-type" type="radio" value="LIB" />
         Librarian</label>
+    <label class="radio-label" for="administrator">
+        <input id="admin" name="user-type" type="radio" value="ADM" />
+        Administrator</label>
     <p class="tiny">* Required</p>
     <hr class="invis" />
-    <button>Add User</button>
+    <button id="add-user">Add User</button>
     </section>
     <section>
         <h2>User List</h2>
-        <table>
+        <table id="users">
             <thead>
                 <th>ID</th>
                 <th>Username</th>
