@@ -19,10 +19,10 @@
 body {
     background: var(--dark-grey-min);
     color: var(--lite-grey);
+    text-shadow: 1px 1px 1px var(--dark-black-max);
     font-family: Barlow, sans-serif;
     font-weight: 200;
     margin: 0;
-    text-shadow: 1px 1px 1px var(--dark-black-max);
 }
 
 a {
@@ -140,7 +140,7 @@ input, button, .radio-label {
 input, .radio-label {
     font-weight: 100;
     color: var(--lite-grey);
-    background: var(--dark-black-min);
+    background-color: var(--dark-black-min);
 }
 
 button {
