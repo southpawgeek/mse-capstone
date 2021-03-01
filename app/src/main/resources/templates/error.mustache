@@ -1,9 +1,10 @@
 {{>header}}
     <section>
         {{#notification}}
-            <p id="message" class="notification {{notification.type}}">
-                <i class="fas fa-heart-broken"></i> {{notification.message}} error! 
-            </p>
+            <div id="message" class="notification {{notification.type}}" style="text-align: center;">
+                    <h2><i class="fas fa-heart-broken"></i> {{notification.code}}!</h2>
+                    {{notification.message}}
+            </div>
         {{/notification}}
     </section>
 {{>footer}}

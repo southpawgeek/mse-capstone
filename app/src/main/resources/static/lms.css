@@ -181,5 +181,17 @@ hr.invis {
     font-weight: 200;
 }
 
+#error-code {
+    display: inline-block;
+    width: 100%;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.news { background-color: var(--lite-purple); }
+.default { background-color: var(--lite-blue); }
 .good { background-color: var(--lite-green); }
-.bad { background-color: var(--lite-red); }
+.info { background-color: var(--lite-yellow); }
+.warn { background-color: var(--lite-orange); }
+.bad, .error { background-color: var(--lite-red); }

@@ -1,8 +1,9 @@
 package edu.brandeis.gps.rseg127.lms.utils;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter @Setter
 public class Message {
     private String type;
     private String message;
@@ -11,4 +12,16 @@ public class Message {
         this.type = type;
         this.message = message;
     }
+
+    // default message type
+    public Message(String message) {
+        this.type = "default";
+        this.message = message;
+    }
+
+    // default empty message
+    public Message() {
+        this.type = "default";
+        this.message = "This is an empty message.";
+    };
 }
