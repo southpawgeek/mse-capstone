@@ -1,0 +1,9 @@
+{{>header}}
+    <section>
+        {{#notification}}
+            <p id="message" class="notification {{notification.type}}">
+                <i class="fas fa-heart-broken"></i> {{notification.message}} error! 
+            </p>
+        {{/notification}}
+    </section>
+{{>footer}}
