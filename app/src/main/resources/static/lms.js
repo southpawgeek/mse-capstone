@@ -1,4 +1,3 @@
-/* jslint browser: true, es6: true, latedef: nofunc, global $ */
     function addAsset() {
         var title = $("#title").val();
         var isbn = $("#isbn").val();

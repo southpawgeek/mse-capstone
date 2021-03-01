@@ -1,5 +1,13 @@
 {{>header}}
     <section>
-        <p>{{message}}</p>
+        {{#notification}}
+            <p id="message" class="{{notification.type}}">
+                {{notification.message}}
+            </p>
+        {{/notification}}
+
+        {{#message}}
+            <p>{{.}}</p>
+        {{/message}}
     </section>
 {{>footer}}
