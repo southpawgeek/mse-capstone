@@ -7,33 +7,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 @Entity
-public class Audit {
-
+public class AssetCopy {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name="actor_user")
-    private String actorUser;
+    @Column(name="asset_id")
+    private Integer assetId;
 
-    @Column(name="action")
-    private String action;
+    @Column(name="user_id")
+    private Integer userId;
 
-    @Column(name="target_user")
-    private String targetUser;
+    private String status;
 
-    @Column(name="copy_id")
-    private Integer copyId;
-
-    @Setter(AccessLevel.NONE)
-    @Column(name="action_date")
-    private Timestamp actionDate;
+    @Column(name="due_date")
+    private Timestamp dueDate;
 }
