@@ -22,7 +22,15 @@ public class AuthorService {
         return authorRepo.save(author);
     }
 
+    public Author updateAuthor(Author author) {
+        return authorRepo.save(author);
+    }
+
     public Author getAuthor(Integer id) {
         return authorRepo.findById(id).get();
+    }
+
+    public void deleteAuthor(Integer id) {
+        authorRepo.deleteById(id);
     }
 }
