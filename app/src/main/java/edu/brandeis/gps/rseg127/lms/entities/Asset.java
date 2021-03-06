@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,15 +17,12 @@ public class Asset {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotBlank(message="Title is mandatory.")
     @Column(name="title")
     private String title;
 
-    @NotBlank(message="ISBN is mandatory.")
     @Column(name="isbn")
     private String isbn;
 
-    @NotBlank(message="Call number is mandatory.")
     @Column(name="call_number")
     private String callNumber;
 
