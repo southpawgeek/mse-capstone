@@ -1,0 +1,21 @@
+{{>header}}
+    <section>
+        {{#notification}}
+            <p id="message" class="{{notification.type}}">
+                {{notification.message}}
+            </p>
+        {{/notification}}
+
+    <h2>Login</h2>
+    <p id="message" style="display:none;"></p>
+    <form action="login" method="post">
+        <h3>Username</h3>
+        <input name="username" id="username" type="text" />
+        <h3>Password</h3>
+        <input name="password" id="password" type="password" />
+        <hr class="invis" />
+        <!--input type="hidden" name="_csrf" value="_csrf.token" /-->
+        <button id="login" type="submit">Login</button>
+    </form>
+    </section>
+{{>footer}}

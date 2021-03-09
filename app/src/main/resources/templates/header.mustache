@@ -16,9 +16,14 @@
     </header>
 
     <aside>
+        {{#auth-initial}}
         <div id="current-user">
-            <p id="user-initial">?</p>
-            <a href="/login">login [NYI]</a>
+            <p id="user-initial">{{.}}</p>
+            <span id="user-username">{{auth-username}}</span>
+            <form id="logout" action="/logout" method="post">
+                <input type="hidden" name="_csrf" value="_csrf.token" />
+                <button type="submit" id="logout">logout</button>
+            </form>
         </div>
         <nav>
             <ul>
@@ -27,5 +32,6 @@
                 <li><i class="fas fa-users"></i> <a href="/users">Users</a></li>
                 <li><i class="fas fa-list-alt"></i> <a href="/audit-log">Audit Log</a></li>
         </nav>
+        {{/auth-initial}}
     </aside>
     <main>

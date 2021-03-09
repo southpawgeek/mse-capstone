@@ -17,7 +17,6 @@ import edu.brandeis.gps.rseg127.lms.services.UserService;
 
 @Controller
 public class WebController {
-
 	@RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("message", "Welcome! There isn't much here yet.");
@@ -42,15 +41,8 @@ public class WebController {
         return "users";
     }
 
-    @GetMapping("/login")
-    public String loginPage(Model model) {
-        model.addAttribute("message", "Told you this wasn't implemented.");
-        return "index";
-    }
-
     @Autowired
     private AuditService auditService;
-
     @GetMapping("/audit-log")
     public String getAllAudit(Model model) {
         List<Audit> audits = auditService.getAllAudits();
