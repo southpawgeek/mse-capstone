@@ -29,7 +29,7 @@ create table asset_copy(
     asset_id int not null,
     user_id int,
     status varchar(10),
-    due_date datetime,
+    due_date timestamp not null default current_timestamp,
     primary key (id)
 );
 
