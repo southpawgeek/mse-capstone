@@ -1,3 +1,4 @@
+// REST endpoints for Asset and AssetCopy
 package edu.brandeis.gps.rseg127.lms.controllers;
 
 import java.util.List;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.brandeis.gps.rseg127.lms.entities.Asset;
+import edu.brandeis.gps.rseg127.lms.entities.AssetCopy;
+import edu.brandeis.gps.rseg127.lms.services.AssetCopyService;
 import edu.brandeis.gps.rseg127.lms.services.AssetService;
 
 @RestController
@@ -21,6 +24,10 @@ public class AssetEndpointController {
     @Autowired
     private AssetService assetService;
 
+    @Autowired
+    private AssetCopyService assetCopyService;
+
+    // Asset
     @PostMapping(consumes="application/json", produces="application/json", path="/api/assets")
     public ResponseEntity<Asset> createAsset(@RequestBody Asset asset) {
         return new ResponseEntity<>(assetService.createAsset(asset), HttpStatus.CREATED);
@@ -50,8 +57,44 @@ public class AssetEndpointController {
     }
 
     @DeleteMapping(path="/api/assets/{id}", produces="application/json")
-    public ResponseEntity<String> deleteAsset(@PathVariable(value="id") Integer id) {
+    public ResponseEntity<String> deleteAsset(@PathVariable(value = "id") Integer id) {
         assetService.deleteAsset(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    
+    // AssetCopy
+    @PostMapping(consumes="application/json", produces="application/json", path="/api/assets/copy")
+    public ResponseEntity<AssetCopy> createAssetCopy(@RequestBody AssetCopy assetCopy) {
+        return new ResponseEntity<>(assetCopyService.createAssetCopy(assetCopy), HttpStatus.CREATED);
+    }
+
+    @PutMapping(consumes = "application/json", produces = "application/json", path = "/api/assets/copy/{id}")
+    public ResponseEntity<AssetCopy> updateAssetCopy(@RequestBody AssetCopy assetCopy, @PathVariable Integer id) {
+        // pull up a copy of the current asset
+        AssetCopy updatedAssetCopy = new AssetCopy();
+
+        // fill in the blanks with submitted data
+        updatedAssetCopy.setAssetId(assetCopy.getAssetId());
+        updatedAssetCopy.setUserId(assetCopy.getUserId());
+        updatedAssetCopy.setStatus(assetCopy.getStatus());
+        updatedAssetCopy.setDueDate(assetCopy.getDueDate());
+
+        return new ResponseEntity<>(assetCopyService.updateAssetCopy(updatedAssetCopy), HttpStatus.CREATED);
+    }
+
+    @GetMapping(path="/api/assets/copy/{id}", produces="application/json")
+    public ResponseEntity<AssetCopy> getAssetCopy(@PathVariable(value = "id") Integer id) {
+        return new ResponseEntity<>(assetCopyService.getAssetCopy(id), HttpStatus.OK);
+    }
+
+    @GetMapping(path="/api/assets/copy", produces="application/json")
+    public ResponseEntity<List<AssetCopy>> getAllAssetCopies() {
+        return new ResponseEntity<>(assetCopyService.getAllAssetCopies(), HttpStatus.OK);
+    }
+
+    @DeleteMapping(path="/api/assets/copy/{id}", produces="application/json")
+    public ResponseEntity<String> deleteAssetCopy(@PathVariable(value = "id") Integer id) {
+        assetCopyService.deleteAssetCopy(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

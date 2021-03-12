@@ -19,14 +19,15 @@ public class AssetCopy {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column(name="status")
+    private String status;
+
+    @Column(name="due_date")
+    private Timestamp dueDate;
+
     @Column(name="asset_id")
     private Integer assetId;
 
     @Column(name="user_id")
     private Integer userId;
-
-    private String status;
-
-    @Column(name="due_date")
-    private Timestamp dueDate;
 }
