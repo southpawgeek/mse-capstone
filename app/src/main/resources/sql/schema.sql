@@ -27,7 +27,7 @@ create table cart(
 create table asset_copy(
     id int not null auto_increment,
     asset_id int not null,
-    user_id int not null,
+    user_id int,
     status varchar(10),
     due_date datetime,
     primary key (id)
@@ -37,7 +37,7 @@ create table asset(
     id int not null auto_increment,
     title varchar(100) not null,
     isbn varchar(50) not null,
-    call_number varchar(50) not null,
+    call_number varchar(50),
     primary key (id)
 );
 
