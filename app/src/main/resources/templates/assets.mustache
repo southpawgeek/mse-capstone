@@ -1,5 +1,5 @@
 {{>header}}
-    <section>
+    {{#assets-page}}<section>
     <h2>Add New Asset</h2>
     <p id="message" style="display:none;"></p>
     <h3>Title *</h3>
@@ -11,7 +11,7 @@
     <p class="tiny">* Required</p>
     <hr class="invis" />
     <button id="add-asset">Add Asset</button>
-    </section>
+    </section>{{/assets-page}}
     <section>
         <h2>Asset List</h2>
         <table id="assets">
@@ -19,12 +19,14 @@
                 <th>Title</th>
                 <th>ISBN</th>
                 <th>Call Number</th>
+                {{#assets-page}}<th>Copies</th>{{/assets-page}}
             </thead>
             <tbody>
-                {{#assets}}<tr>
+                {{#assets}}<tr id='asset-{{id}}'>
                 <td>{{title}}</td>
                 <td>{{isbn}}</td>
                 <td>{{callNumber}}</td>
+                {{#assets-page}}<td><button class="add-copy" value="{{id}}">+</button></td>{{/assets-page}}
                 {{/assets}}</tr>
             </tbody>
         </table>

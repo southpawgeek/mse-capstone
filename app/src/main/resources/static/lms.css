@@ -201,6 +201,11 @@ hr.invis {
     text-align: center;
 }
 
+.asset-copies {
+    display: inline-block; 
+    width: 2.5rem; 
+}
+
 .news { background-color: var(--lite-purple); }
 .default { background-color: var(--lite-blue); }
 .good { background-color: var(--lite-green); }

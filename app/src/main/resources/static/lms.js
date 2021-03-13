@@ -8,7 +8,6 @@
         if (isbn != "") { mydata.isbn = isbn; }
         if (callnum != "") { mydata.callNumber = callnum; }
 
-        console.log(mydata);
         fetch("/api/assets", {
             method: 'POST',
             headers: { 'Content-type': 'application/json' },
@@ -30,7 +29,6 @@
                 throw new Error("API call failed: " + data.status);
         })
             .catch((error) => {
-                console.error('BAD', error);
                 $("#message")
                     .removeClass()
                     .addClass("bad")
@@ -42,17 +40,58 @@
         return;
     }
 
+function addCopy(id) {
+    var mydata = {};
+    mydata.assetId = id;
+    mydata.status = "NEW";
+    console.log(mydata);
+    fetch("/api/assets/copy", {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(mydata)
+    })
+        .then(data => {
+        console.log(data);
+        if (data.ok) {
+        $("#message")
+            .removeClass()
+            .addClass("good")
+            .html("Added new copy.")
+            .slideDown()
+            .delay(2000)
+            .slideUp(1000);
+            refreshAssets();
+            return;
+        }
+            throw new Error("API call failed: " + data.status);
+    })
+        .catch((error) => {
+            $("#message")
+                .removeClass()
+                .addClass("bad")
+                .html(error)
+                .slideDown()
+                .delay(2000)
+                .slideUp(1000);
+    })
+    return;
+}
+
 function refreshAssets() {
     fetch("/api/assets")
-        .then(response => response.json().then(data => {
-            $("#assets").empty();
-            $.each(data, function (key) {
-                $("#assets").append(
-                    "<tr><td>" + data[key].title + "</td> <td>" + data[key].isbn + "</td> <td>" + data[key].callNumber + "</td></tr>"
-                )
-            });
-        }))
-        return;
+        .then(response => response.json()
+            .then(data => {
+                $("#assets").empty();
+                console.log(data);
+                $.each(data, function (key) {
+                    copies_total = data[key].copies.length;
+                    var row = "<tr id='asset-" + data[key].id + "'><td>" + data[key].title + "</td> <td>" + data[key].isbn + "</td> <td>" + data[key].callNumber + "</td><td><span class='asset-copies'>" + copies_total + "</span><button class='add-copy' value='" + data[key].id + "'>+</i></button></td>";
+                    $("#assets").append(row);
+                    $("#asset-" + data[key].id).delegate('button', 'click', function () { addCopy(data[key].id); });
+                })
+            })
+    )
+    return;
 }
 
     function addUser() {
@@ -112,15 +151,16 @@ function refreshAssets() {
 
 function refreshUsers() {
     fetch("/api/users")
-        .then(response => response.json().then(data => {
-            $("#users").empty();
-            $.each(data, function (key) {
-                if (data[key].lastName != "") { data[key].lastName += ", "}
-                $("#users").append(
-                    "<tr><td>" + data[key].id + "</td> <td>" + data[key].username + "</td> <td>" + data[key].patronId + "</td><td>" + data[key].lastName + data[key].firstName + " " + data[key].middleName + "</td></tr>"
-                )
-            });
-        }))
+        .then(response => response.json()
+            .then(data => {
+                $("#users").empty();
+                $.each(data, function (key) {
+                    if (data[key].lastName != "") { data[key].lastName += ", "}
+                    $("#users").append(
+                        "<tr><td>" + data[key].id + "</td> <td>" + data[key].username + "</td> <td>" + data[key].patronId + "</td><td>" + data[key].lastName + data[key].firstName + " " + data[key].middleName + "</td></tr>"
+                    )
+                });
+            }))
         return;
 }
 
@@ -132,5 +172,9 @@ $(document).ready(function () {
 
     $("#add-user").click(function () {
         addUser();
+    })
+
+    $(".add-copy").click(function () {
+        addCopy($(this).val());
     })
 });

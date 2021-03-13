@@ -29,7 +29,28 @@ public class WebController {
     public String getAllAssets(Model model) {
         List<Asset> assets = assetService.getAllAssets();
         model.addAttribute("assets", assets);
+        model.addAttribute("assets-page", true);
         return "assets";
+    }
+
+    @GetMapping("/browse")
+    public String getAllAssetsBrowse(Model model) {
+        List<Asset> assets = assetService.getAllAssets();
+        model.addAttribute("assets", assets);
+        model.addAttribute("browse-page", true);
+        return "assets";
+    }
+
+    @GetMapping("/borrowed")
+    public String getBorrowedList(Model model) {
+        // NYI
+        return "borrowed";
+    }
+
+    @GetMapping("/bookbag")
+    public String getBookBag(Model model) {
+        // NYI
+        return "bookbag";
     }
 
 	@Autowired
