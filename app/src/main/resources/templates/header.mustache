@@ -20,7 +20,7 @@
         <div id="current-user">
             <p id="user-initial">{{.}}</p>
             <span id="user-username">{{auth-username}}</span>
-            <form id="logout" action="/logout" method="post">
+            <form id="logout-form" action="/logout" method="post">
                 <input type="hidden" name="_csrf" value="_csrf.token" />
                 <button type="submit" id="logout">logout</button>
             </form>
