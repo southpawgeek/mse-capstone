@@ -1,6 +1,8 @@
 package edu.brandeis.gps.rseg127.lms.entities;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -17,19 +19,20 @@ public class Asset {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name="title")
+    @Column(name = "title")
     private String title;
 
-    @Column(name="isbn")
+    @Column(name = "isbn")
     private String isbn;
 
-    @Column(name="call_number")
+    @Column(name = "call_number")
     private String callNumber;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "asset_author", joinColumns = @JoinColumn(name = "asset_id"), inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors = new HashSet<>();
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<AssetCopy> copies = new HashSet<>();
+    // contains all copies and some count info
+    @javax.persistence.Transient
+    private CopyCount count;
 }

@@ -2,11 +2,7 @@ package edu.brandeis.gps.rseg127.lms.entities;
 
 import java.sql.Timestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,9 +21,12 @@ public class AssetCopy {
     @Column(name="due_date")
     private Timestamp dueDate;
 
+    @Column(name="user_id")
+    private Integer userId;
+
     @Column(name="asset_id")
     private Integer assetId;
 
-    @Column(name="user_id")
-    private Integer userId;
+    @javax.persistence.Transient
+    private Asset asset;
 }

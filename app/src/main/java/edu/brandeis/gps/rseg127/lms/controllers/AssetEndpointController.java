@@ -48,7 +48,7 @@ public class AssetEndpointController {
 
     @GetMapping(path="/api/assets/{id}", produces="application/json")
     public ResponseEntity<Asset> getAsset(@PathVariable(value = "id") Integer id) {
-        return new ResponseEntity<>(assetService.getAsset(id), HttpStatus.OK);
+        return new ResponseEntity<>(assetService.getAssetWithCopies(id), HttpStatus.OK);
     }
 
     @GetMapping(path="/api/assets", produces="application/json")
