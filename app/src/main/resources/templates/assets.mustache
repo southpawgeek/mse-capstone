@@ -26,7 +26,7 @@
                 <td>{{title}}</td>
                 <td>{{isbn}}</td>
                 <td>{{callNumber}}</td>
-                {{#assets-page}}<td><button class="add-copy" value="{{id}}">+</button></td>{{/assets-page}}
+                {{#assets-page}}<td><span id="asset-total-{{id}}" class='asset-copies'>{{count.stats.total}}</span><button class="add-copy" value="{{id}}">+</button></td>{{/assets-page}}
                 {{/assets}}</tr>
             </tbody>
         </table>

@@ -1,10 +1,12 @@
 package edu.brandeis.gps.rseg127.lms.services;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import edu.brandeis.gps.rseg127.lms.entities.AssetCopy;
+import edu.brandeis.gps.rseg127.lms.entities.AssetCopyListWithAsset;
 import edu.brandeis.gps.rseg127.lms.repos.AssetCopyRepo;
 import edu.brandeis.gps.rseg127.lms.repos.AssetRepo;
 
@@ -18,12 +20,17 @@ public class AssetCopyService {
     private AssetRepo assetRepo;
 
     public AssetCopy getAssetCopy(Integer id) {
-        AssetCopy myCopy = assetCopyRepo.findById(id).get();
-        myCopy.setAsset(assetRepo.findById(myCopy.getAssetId()).get());
-        return myCopy;
+        return assetCopyRepo.getOne(id);
     }
 
-    public List<AssetCopy> getAllAssetCopies() {
+    public AssetCopyListWithAsset getAssetCopyListWithAsset(Integer id) {
+        AssetCopyListWithAsset copyList = new AssetCopyListWithAsset();
+        copyList.setAssetCopyList(getByAssetId(id));
+        copyList.setAsset(assetRepo.getOne(id));
+        return copyList;
+    }
+
+    public List<AssetCopy> getAssetCopyList() {
         return assetCopyRepo.findAll();
     }
 

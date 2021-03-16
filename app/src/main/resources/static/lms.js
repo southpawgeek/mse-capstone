@@ -60,7 +60,7 @@ function addCopy(id) {
             .slideDown()
             .delay(2000)
             .slideUp(1000);
-            refreshAssets();
+            refreshAsset(id);
             return;
         }
             throw new Error("API call failed: " + data.status);
@@ -77,6 +77,16 @@ function addCopy(id) {
     return;
 }
 
+function refreshAsset(id) {
+    fetch("/api/assets/" + id, {
+        method: 'GET'
+    })
+        .then(response => response.json()
+            .then(data => {
+                $("#asset-total-" + id).html(data.count.stats.total);
+        }))
+}
+
 function refreshAssets() {
     fetch("/api/assets")
         .then(response => response.json()
@@ -84,7 +94,7 @@ function refreshAssets() {
                 $("#assets").empty();
                 console.log(data);
                 $.each(data, function (key) {
-                    copies_total = data[key].copies.length;
+                    copies_total = data[key].count.stats.total;
                     var row = "<tr id='asset-" + data[key].id + "'><td>" + data[key].title + "</td> <td>" + data[key].isbn + "</td> <td>" + data[key].callNumber + "</td><td><span class='asset-copies'>" + copies_total + "</span><button class='add-copy' value='" + data[key].id + "'>+</i></button></td>";
                     $("#assets").append(row);
                     $("#asset-" + data[key].id).delegate('button', 'click', function () { addCopy(data[key].id); });
@@ -94,60 +104,60 @@ function refreshAssets() {
     return;
 }
 
-    function addUser() {
-        var username = $("#username").val();
-        var password = $("#password-hash").val();
-        var email = $("#email").val();
-        var first = $("#first-name").val();
-        var middle = $("#middle-name").val();
-        var last = $("#last-name").val();
-        var user_type = $("input[type='radio'][name='user-type']:checked").val();
+function addUser() {
+    var username = $("#username").val();
+    var password = $("#password-hash").val();
+    var email = $("#email").val();
+    var first = $("#first-name").val();
+    var middle = $("#middle-name").val();
+    var last = $("#last-name").val();
+    var user_type = $("input[type='radio'][name='user-type']:checked").val();
 
-        var mydata = {};
-        mydata.username = username;
-        mydata.passwordHash = password;
-        mydata.emailAddress = email;
-        mydata.firstName = first;
-        mydata.middleName = middle;
-        mydata.lastName = last;
-        mydata.userType = user_type;
+    var mydata = {};
+    mydata.username = username;
+    mydata.passwordHash = password;
+    mydata.emailAddress = email;
+    mydata.firstName = first;
+    mydata.middleName = middle;
+    mydata.lastName = last;
+    mydata.userType = user_type;
 
-    /* this is really not something we'd do in production */
-        mydata.patronId = user_type + Math.floor(Math.random() * 1000000);
+/* this is really not something we'd do in production */
+    mydata.patronId = user_type + Math.floor(Math.random() * 1000000);
 
-        console.log(mydata);
-        fetch("/api/users", {
-            method: 'POST',
-            headers: { 'Content-type': 'application/json' },
-            body: JSON.stringify(mydata)
-        })
-            .then(data => {
-                console.log(data);
-                if (data.ok) {
-                $("#message")
-                    .removeClass()
-                    .addClass("good")
-                    .html("Added new user: " + username)
-                    .slideDown()
-                    .delay(2000)
-                    .slideUp(1000);
-                    refreshUsers();
-                    return;
-                }
-                throw new Error("API call failed: " + data.status);
-        })
-            .catch((error) => {
-                console.error('BAD', error);
-                $("#message")
-                    .removeClass()
-                    .addClass("bad")
-                    .html(error)
-                    .slideDown()
-                    .delay(2000)
-                    .slideUp(1000);
-        })
-        return;
-    }
+    console.log(mydata);
+    fetch("/api/users", {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(mydata)
+    })
+        .then(data => {
+            console.log(data);
+            if (data.ok) {
+            $("#message")
+                .removeClass()
+                .addClass("good")
+                .html("Added new user: " + username)
+                .slideDown()
+                .delay(2000)
+                .slideUp(1000);
+                refreshUsers();
+                return;
+            }
+            throw new Error("API call failed: " + data.status);
+    })
+        .catch((error) => {
+            console.error('BAD', error);
+            $("#message")
+                .removeClass()
+                .addClass("bad")
+                .html(error)
+                .slideDown()
+                .delay(2000)
+                .slideUp(1000);
+    })
+    return;
+}
 
 function refreshUsers() {
     fetch("/api/users")

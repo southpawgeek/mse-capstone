@@ -26,7 +26,4 @@ public class AssetCopy {
 
     @Column(name="asset_id")
     private Integer assetId;
-
-    @javax.persistence.Transient
-    private Asset asset;
 }

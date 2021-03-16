@@ -48,7 +48,7 @@ public class AssetEndpointController {
 
     @GetMapping(path="/api/assets/{id}", produces="application/json")
     public ResponseEntity<Asset> getAsset(@PathVariable(value = "id") Integer id) {
-        return new ResponseEntity<>(assetService.getAssetWithCopies(id), HttpStatus.OK);
+        return new ResponseEntity<>(assetService.getAssetWithAssetCopyList(id), HttpStatus.OK);
     }
 
     @GetMapping(path="/api/assets", produces="application/json")
@@ -88,8 +88,8 @@ public class AssetEndpointController {
     }
 
     @GetMapping(path="/api/assets/copy", produces="application/json")
-    public ResponseEntity<List<AssetCopy>> getAllAssetCopies() {
-        return new ResponseEntity<>(assetCopyService.getAllAssetCopies(), HttpStatus.OK);
+    public ResponseEntity<List<AssetCopy>> getAssetCopyList() {
+        return new ResponseEntity<>(assetCopyService.getAssetCopyList(), HttpStatus.OK);
     }
 
     @DeleteMapping(path="/api/assets/copy/{id}", produces="application/json")

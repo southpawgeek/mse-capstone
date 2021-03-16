@@ -19,11 +19,21 @@ public class AssetService {
     private AssetCopyRepo assetCopyRepo;
 
     public List<Asset> getAllAssets() {
-        return assetRepo.findAll();
+        List<Asset> assets = assetRepo.findAll();
+        for (Asset asset : assets) {
+            CopyCount copyCount = new CopyCount(assetCopyRepo.findByAssetId(asset.getId()));
+            asset.setCount(copyCount);
+        }
+        return assets;
     }
 
     public Asset createAsset(Asset asset) {
-        return assetRepo.save(asset);
+        assetRepo.save(asset);
+        AssetCopy assetCopy = new AssetCopy();
+        assetCopy.setAssetId(asset.getId());
+        assetCopy.setStatus("NEW");
+        assetCopyRepo.save(assetCopy);
+        return asset;
     }
 
     public Asset updateAsset(Asset asset) {
@@ -34,11 +44,11 @@ public class AssetService {
         return assetRepo.findById(id).get();
     }
 
-    public Asset getAssetWithCopies(Integer id) {
-        Asset myAsset = assetRepo.findById(id).get();
-        List<AssetCopy> copies = assetCopyRepo.findByAssetId(id);
-        myAsset.setCount(new CopyCount(copies));
-        return myAsset;
+    public Asset getAssetWithAssetCopyList(Integer id) {
+        Asset asset = assetRepo.findById(id).get();
+        List<AssetCopy> assetCopyList = assetCopyRepo.findByAssetId(id);
+        asset.setCount(new CopyCount(assetCopyList));
+        return asset;
     }
 
     public void deleteAsset(Integer id) {
