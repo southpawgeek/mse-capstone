@@ -9,25 +9,49 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+//Keeping in memory code just in case it is needed for future tests
+
+//@Configuration
+//@EnableWebSecurity
+//public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+//    @Override
+//    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+//        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+//        auth.inMemoryAuthentication()
+//            .withUser("admin")
+//                .password(encoder.encode("password"))
+//                .roles("ADMIN")
+//            .and()
+//            .withUser("librarian")
+//                .password(encoder.encode("password"))
+//                .roles("LIBRARIAN")
+//            .and()
+//            .withUser("patron")
+//                .password(encoder.encode("password"))
+//                .roles("PATRON");
+//    }
+
+//Configuration for authenticating users from a database
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    @Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        auth.inMemoryAuthentication()
-            .withUser("admin")
-                .password(encoder.encode("password"))
-                .roles("ADMIN")
-            .and()
-            .withUser("librarian")
-                .password(encoder.encode("password"))
-                .roles("LIBRARIAN")
-            .and()
-            .withUser("patron")
-                .password(encoder.encode("password"))
-                .roles("PATRON");
+        auth.jdbcAuthentication()
+                .passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder())
+                .dataSource(dataSource)
+                .usersByUsernameQuery("select username, password_hash as password, true as enabled from user where username=?")
+                .authoritiesByUsernameQuery("select username, user_type as role from user where username=?")
+        ;
     }
 
     @Override
