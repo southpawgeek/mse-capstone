@@ -9,6 +9,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import lombok.Data;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @Entity
@@ -25,7 +28,12 @@ public class User {
     private String userType;
 
     @Column(name="password_hash")
+    @Setter(AccessLevel.NONE)
     private String passwordHash;
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = "{noop}" +passwordHash;
+    }
 
     @Column(name="patron_id")
     private String patronId;
