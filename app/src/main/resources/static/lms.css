@@ -140,7 +140,9 @@ thead {
     text-align: left;
 }
 
-input, button, .radio-label {
+input,
+button,
+.radio-label {
     border: none;
     font-family: Barlow, sans-serif;
     border-radius: 1rem;
@@ -149,7 +151,8 @@ input, button, .radio-label {
     margin-right: 0.5rem;
 }
 
-input, .radio-label {
+input,
+.radio-label {
     font-weight: 100;
     color: var(--lite-grey);
     background-color: var(--dark-black-min);
@@ -162,7 +165,8 @@ button {
     box-shadow: 1px 1px 1px var(--dark-black-min);
 }
 
-button:focus, input:focus {
+button:focus,
+input:focus {
     outline: 0;
 }
 
@@ -202,13 +206,74 @@ hr.invis {
 }
 
 .asset-copies {
-    display: inline-block; 
-    width: 2.5rem; 
+    display: inline-block;
+    width: 2.5rem;
 }
 
-.news { background-color: var(--lite-purple); }
-.default { background-color: var(--lite-blue); }
-.good { background-color: var(--lite-green); }
-.info { background-color: var(--lite-yellow); }
-.warn { background-color: var(--lite-orange); }
-.bad, .error { background-color: var(--lite-red); }
+#full-modal {
+    position: fixed;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: calc(100% - 8rem);
+    height: 100vh;
+    left: 8rem;
+    backdrop-filter: blur(1px);
+}
+
+#full-modal-content {
+    margin: 1rem auto;
+    padding: 1rem;
+    width: 90%;
+    background-color: var(--dark-grey-max);
+}
+
+#full-modal-close {
+    float: right;
+    margin: 0;
+}
+
+.asset-item {
+    height: 2.5rem;
+}
+
+.asset-item:hover {
+    color: var(--lite-yellow);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.asset-copy-status {
+    display: inline-block;
+    width: 10rem;
+}
+
+.asset-copy-button {
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.1rem 0.3rem;
+}
+
+.news {
+    background-color: var(--lite-purple);
+}
+
+.default {
+    background-color: var(--lite-blue);
+}
+
+.good {
+    background-color: var(--lite-green);
+}
+
+.info {
+    background-color: var(--lite-yellow);
+}
+
+.warn {
+    background-color: var(--lite-orange);
+}
+
+.bad,
+.error {
+    background-color: var(--lite-red);
+}

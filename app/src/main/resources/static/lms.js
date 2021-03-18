@@ -95,13 +95,37 @@ function refreshAssets() {
                 console.log(data);
                 $.each(data, function (key) {
                     copies_total = data[key].count.stats.total;
-                    var row = "<tr id='asset-" + data[key].id + "'><td>" + data[key].title + "</td> <td>" + data[key].isbn + "</td> <td>" + data[key].callNumber + "</td><td><span class='asset-copies'>" + copies_total + "</span><button class='add-copy' value='" + data[key].id + "'>+</i></button></td>";
+                    var row = "<tr id='asset-" + data[key].id + "' class='asset-copy' data-asset-id='" + data[key].id + "'><td>" + data[key].title + "</td> <td>" + data[key].isbn + "</td> <td>" + data[key].callNumber + "</td><td><span class='asset-copies'>" + copies_total + "</span><button class='add-copy' value='" + data[key].id + "'>+</i></button></td>";
                     $("#assets").append(row);
                     $("#asset-" + data[key].id).delegate('button', 'click', function () { addCopy(data[key].id); });
                 })
             })
     )
     return;
+}
+
+function viewAsset(id) {
+    // cleanup prior data
+    $("#asset-modal-copies").empty();
+    $("#asset-modal-title").html('');
+
+    fetch("/api/assets/" + id, {
+        method: 'GET'
+    })
+        .then(response => response.json()
+            .then(data => {
+                console.log(data);
+                $("#full-modal").fadeIn(250);
+                $("#asset-modal-title").html(data.title);
+                $("#asset-modal-isbn").html(data.isbn);
+                let stats = data.count.stats;
+                let copies = data.count.copies;
+
+                $("#asset-modal-total").html(stats.total);
+                $.each(copies, function(key) {
+                    $("#asset-modal-copies").append("<li id='asset-copy-" + copies[key].id + "' class='asset-copy-item'><span class='asset-copy-status'>" + copies[key].status + "</span><button class='asset-copy-button' data-copy-id='" + copies[key].id + "'>Reserve this copy</button></li>");
+                })
+            }))
 }
 
 function addUser() {
@@ -187,4 +211,22 @@ $(document).ready(function () {
     $(".add-copy").click(function () {
         addCopy($(this).val());
     })
+
+    $(".asset-item").click(function() {
+        viewAsset($(this).attr('data-asset-id'));
+    })
+
+    $("#full-modal-close").click(function() {
+        closeModal();
+    })
+
+    $(document).keyup(function(e){
+        if(e.keyCode === 27) {
+            closeModal();
+        }
+    })
+
+    function closeModal() {
+        $("#full-modal").fadeOut(250);
+    }
 });
