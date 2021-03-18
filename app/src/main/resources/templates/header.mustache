@@ -29,7 +29,7 @@
             <ul>
                 <li><i class="fas fa-home"></i> <a href="/">Home</a></li>
                 <li><i class="fas fa-book"></i> <a href="/browse">Browse</a></li>
-                <li><i class="fas fa-shopping-bag"></i><a href="/bookbag">Bookbag</a></li>
+                <li><i class="fas fa-shopping-bag"></i><a href="/bookbag">Bookbag {{#user-cart-count}}({{.}}){{/user-cart-count}}</a></li>
                 <li><i class="fas fa-clock"></i><a href="/borrowed">Loans</a></li>
                 <!-- admin only stuff -->
                 <li><i class="fas fa-book"></i> <a href="/assets">Assets</a></li>

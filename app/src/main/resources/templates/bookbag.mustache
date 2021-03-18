@@ -3,11 +3,11 @@
     <h2>My Bookbag</h2>
     <p id="message" style="display:none;"></p>
     </section>
-    <h2>list goes here</h2>
-    <section>
+    <section>{{#user-cart}}
         <ul>
-            <li>book 1</li>
-            <li>book 2</li>
+            <li>{{asset.title}}</li>
         </ul>
+    {{/user-cart}}
+    {{^user-cart-count}}Your bookbag is empty!{{/user-cart-count}}    
     </section>
 {{>footer}}

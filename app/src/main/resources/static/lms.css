@@ -21,7 +21,7 @@ body {
     color: var(--lite-grey);
     text-shadow: 1px 1px 1px var(--dark-black-max);
     font-family: Barlow, sans-serif;
-    font-weight: 200;
+    font-weight: 300;
     margin: 0;
 }
 
@@ -153,7 +153,7 @@ button,
 
 input,
 .radio-label {
-    font-weight: 100;
+    font-weight: 300;
     color: var(--lite-grey);
     background-color: var(--dark-black-min);
 }
@@ -194,7 +194,7 @@ hr.invis {
     padding: 0.5rem;
     color: var(--dark-black-max);
     text-shadow: none;
-    font-weight: 200;
+    font-weight: 300;
 }
 
 #error-code {
@@ -232,8 +232,8 @@ hr.invis {
     margin: 0;
 }
 
-.asset-item {
-    height: 2.5rem;
+.asset-copy-item {
+    height: 2rem;
 }
 
 .asset-item:hover {

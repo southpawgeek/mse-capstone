@@ -10,4 +10,7 @@ public interface AssetCopyRepo extends JpaRepository<AssetCopy, Integer> {
 
     @Query("select ac from AssetCopy ac where ac.assetId = ?1")
     List<AssetCopy> findByAssetId(Integer id);
+
+    @Query("select ac from AssetCopy ac where ac.userId = ?1")
+    List<AssetCopy> findByUserId(Integer id);
 }

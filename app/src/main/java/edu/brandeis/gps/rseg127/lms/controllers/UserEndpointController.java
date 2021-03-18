@@ -1,5 +1,6 @@
 package edu.brandeis.gps.rseg127.lms.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.brandeis.gps.rseg127.lms.entities.Cart;
 import edu.brandeis.gps.rseg127.lms.entities.User;
+import edu.brandeis.gps.rseg127.lms.services.CartService;
 import edu.brandeis.gps.rseg127.lms.services.UserService;
 
 @RestController
@@ -21,7 +24,10 @@ public class UserEndpointController {
     @Autowired
     private UserService userService;
 
-    @PostMapping(consumes="application/json", produces="application/json", path="/api/users")
+    @Autowired
+    private CartService cartService;
+
+    @PostMapping(consumes = "application/json", produces = "application/json", path = "/api/users")
     public ResponseEntity<User> createUser(@RequestBody User user) {
         return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
@@ -32,7 +38,7 @@ public class UserEndpointController {
         User updated_user = userService.getUser(id);
 
         // fill in the blanks with submitted data
-        //some things cannot be updated:
+        // some things cannot be updated:
         // id, username, user_type, patron_id, creation_date
         updated_user.setPasswordHash(user.getPasswordHash());
         updated_user.setFirstName(user.getFirstName());
@@ -48,19 +54,25 @@ public class UserEndpointController {
         return new ResponseEntity<>(userService.updateUser(updated_user), HttpStatus.CREATED);
     }
 
-    @GetMapping(path="/api/users/{id}", produces="application/json")
+    @GetMapping(path = "/api/users/{id}", produces = "application/json")
     public ResponseEntity<User> getUser(@PathVariable(value = "id") Integer id) {
         return new ResponseEntity<>(userService.getUser(id), HttpStatus.OK);
     }
 
-    @GetMapping(path="/api/users", produces="application/json")
+    @GetMapping(path = "/api/users", produces = "application/json")
     public ResponseEntity<List<User>> getAllUsers() {
         return new ResponseEntity<>(userService.getAllUsers(), HttpStatus.OK);
     }
 
-    @DeleteMapping(path="/api/users/{id}", produces="application/json")
-    public ResponseEntity<String> deleteUser(@PathVariable(value="id") Integer id) {
+    @DeleteMapping(path = "/api/users/{id}", produces = "application/json")
+    public ResponseEntity<String> deleteUser(@PathVariable(value = "id") Integer id) {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    // users can have a cart/bookbag
+    @GetMapping(path = "/api/users/{id}/cart", produces = "application/json")
+    public ResponseEntity<List<Cart>> getUserCart(@PathVariable(value = "id") Integer id) {
+        return new ResponseEntity<>(cartService.getUserCart(id), HttpStatus.OK);
     }
 }

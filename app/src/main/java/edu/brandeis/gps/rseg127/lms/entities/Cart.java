@@ -1,10 +1,13 @@
 package edu.brandeis.gps.rseg127.lms.entities;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,9 +20,12 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name="user_id")
+    @Column(name = "user_id")
     private Integer userId;
 
-    @Column(name="copy_id")
+    @Column(name = "copy_id")
     private Integer copyId;
+
+    @Transient
+    private Asset asset;
 }
