@@ -199,7 +199,9 @@ function refreshUsers() {
 }
 
 function removeItem(id) {
+    //$("#cart-item-" + id + " button").fadeOut();
     $("#cart-item-" + id + " button").fadeOut();
+    $("#cart-item-" + id + " .cart-asset-title").css({"text-decoration": "line-through"});
 
     fetch("/api/cart/" + id, {
     method: 'DELETE' })
