@@ -37,4 +37,8 @@ public class CartService {
 
         return cartList;
     }
+
+    public void deleteCartItem(Integer id) {
+        cartRepo.deleteById(id);
+    }
 }

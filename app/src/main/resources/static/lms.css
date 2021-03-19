@@ -17,6 +17,7 @@
 }
 
 body {
+    font-size: 0.9em;
     background: var(--dark-grey-min);
     color: var(--lite-grey);
     text-shadow: 1px 1px 1px var(--dark-black-max);
@@ -89,7 +90,7 @@ aside {
 }
 
 #logout {
-    font-size: 1rem;
+    font-size: 0.8rem;
     margin: 0.1rem;
     padding: 0 0.3rem 0.2rem;
     font-weight: 500;
@@ -101,7 +102,7 @@ aside {
 
 
 nav {
-    padding: 0.25rem 1rem;
+    padding: 0.25rem 0.5rem;
 }
 
 nav ul {
@@ -114,7 +115,8 @@ nav li {
 }
 
 nav i {
-    width: 1.5rem;
+    width: 1.2rem;
+    font-size: 0.8rem;
 }
 
 footer {
@@ -242,12 +244,21 @@ hr.invis {
     cursor: pointer;
 }
 
-.asset-copy-status {
-    display: inline-block;
-    width: 10rem;
+.cart-item {
+    font-size: 1rem;
+    line-height: 1.5rem;
 }
 
-.asset-copy-button {
+.asset-copy-status,
+.cart-asset-title {
+    display: inline-block;
+    width: 18rem;
+    font-weight: 500;
+}
+
+.asset-copy-button,
+.cart-remove-button {
+    cursor: pointer;
     font-size: 0.8rem;
     font-weight: 500;
     padding: 0.1rem 0.3rem;

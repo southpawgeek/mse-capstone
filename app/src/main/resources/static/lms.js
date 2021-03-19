@@ -198,6 +198,21 @@ function refreshUsers() {
         return;
 }
 
+function removeItem(id) {
+    $("#cart-item-" + id + " button").fadeOut();
+
+    fetch("/api/cart/" + id, {
+    method: 'DELETE' })
+        .then(response => {
+            if (response.ok) {
+                $("#cart-item-" + id).slideUp();  
+
+                let count = $("#user-cart-running-total").html();
+                $("#user-cart-running-total").html(parseInt(count) - 1);              
+            }
+    })
+}
+
 $(document).ready(function () {
     /* clicky function hooks for buttons */
     $("#add-asset").click(function () {
@@ -218,6 +233,10 @@ $(document).ready(function () {
 
     $("#full-modal-close").click(function() {
         closeModal();
+    })
+
+    $(".cart-remove-button").click(function() {
+        removeItem($(this).attr('data-cart-id'));
     })
 
     $(document).keyup(function(e){

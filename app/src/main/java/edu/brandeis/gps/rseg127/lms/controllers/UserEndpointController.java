@@ -75,4 +75,11 @@ public class UserEndpointController {
     public ResponseEntity<List<Cart>> getUserCart(@PathVariable(value = "id") Integer id) {
         return new ResponseEntity<>(cartService.getUserCart(id), HttpStatus.OK);
     }
+
+    // break this out into CartController probably
+    @DeleteMapping(path = "/api/cart/{id}", produces = "application/json")
+    public ResponseEntity<String> deleteCartItem(@PathVariable(value = "id") Integer id) {
+        cartService.deleteCartItem(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
