@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import edu.brandeis.gps.rseg127.lms.services.AssetCopyService;
 import edu.brandeis.gps.rseg127.lms.services.AssetService;
 
 @RestController
+@Transactional
 public class AssetEndpointController {
     @Autowired
     private AssetService assetService;
@@ -70,16 +72,15 @@ public class AssetEndpointController {
 
     @PutMapping(consumes = "application/json", produces = "application/json", path = "/api/assets/copy/{id}")
     public ResponseEntity<AssetCopy> updateAssetCopy(@RequestBody AssetCopy assetCopy, @PathVariable Integer id) {
-        // pull up a copy of the current asset
-        AssetCopy updatedAssetCopy = new AssetCopy();
-
+        // pull up a copy of the current asset copy
+        AssetCopy currentAssetCopy = assetCopyService.getAssetCopy(id);
+        
         // fill in the blanks with submitted data
-        updatedAssetCopy.setAssetId(assetCopy.getAssetId());
-        updatedAssetCopy.setUserId(assetCopy.getUserId());
-        updatedAssetCopy.setStatus(assetCopy.getStatus());
-        updatedAssetCopy.setDueDate(assetCopy.getDueDate());
+        currentAssetCopy.setUserId(assetCopy.getUserId());
+        currentAssetCopy.setStatus(assetCopy.getStatus());
+        //currentAssetCopy.setDueDate(assetCopy.getDueDate());
 
-        return new ResponseEntity<>(assetCopyService.updateAssetCopy(updatedAssetCopy), HttpStatus.CREATED);
+        return new ResponseEntity<>(assetCopyService.updateAssetCopy(currentAssetCopy), HttpStatus.CREATED);
     }
 
     @GetMapping(path="/api/assets/copy/{id}", produces="application/json")

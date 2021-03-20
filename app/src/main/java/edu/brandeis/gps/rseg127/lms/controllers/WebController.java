@@ -17,14 +17,21 @@ import edu.brandeis.gps.rseg127.lms.services.UserService;
 
 @Controller
 public class WebController {
+	@Autowired
+    private AssetService assetService;
+
+	@Autowired
+    private UserService userService;
+
+    @Autowired
+    private AuditService auditService;
+
 	@RequestMapping("/")
     public String index(Model model) {
         model.addAttribute("message", "Welcome! There isn't much here yet.");
         return "index";
     }
 
-	@Autowired
-    private AssetService assetService;
     @GetMapping("/assets")
     public String getAllAssets(Model model) {
         List<Asset> assets = assetService.getAllAssets();
@@ -53,8 +60,6 @@ public class WebController {
         return "bookbag";
     }
 
-	@Autowired
-    private UserService userService;
     @GetMapping("/users")
     public String getAllUsers(Model model) {
         List<User> users = userService.getAllUsers();
@@ -62,8 +67,6 @@ public class WebController {
         return "users";
     }
 
-    @Autowired
-    private AuditService auditService;
     @GetMapping("/audit-log")
     public String getAllAudit(Model model) {
         List<Audit> audits = auditService.getAllAudits();

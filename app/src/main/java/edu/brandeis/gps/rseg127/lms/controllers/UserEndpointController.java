@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.brandeis.gps.rseg127.lms.entities.AssetCopyWithAsset;
 import edu.brandeis.gps.rseg127.lms.entities.Cart;
 import edu.brandeis.gps.rseg127.lms.entities.User;
 import edu.brandeis.gps.rseg127.lms.services.CartService;
@@ -73,5 +74,11 @@ public class UserEndpointController {
     @GetMapping(path = "/api/users/{id}/cart", produces = "application/json")
     public ResponseEntity<List<Cart>> getUserCart(@PathVariable(value = "id") Integer id) {
         return new ResponseEntity<>(cartService.getUserCart(id), HttpStatus.OK);
+    }
+
+    // users can have loans
+    @GetMapping(path="/api/users/{id}/loans", produces = "application/json")
+    public ResponseEntity<List<AssetCopyWithAsset>> getUserLoans(@PathVariable(value="id") Integer id) {
+        return new ResponseEntity<>(userService.getUserLoans(id), HttpStatus.OK);
     }
 }

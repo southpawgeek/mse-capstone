@@ -253,6 +253,33 @@ function addItem(id) {
         })
 }
 
+function checkout() {
+    let userid = $("#user-userid").val();
+    $("#bookbag-items li button").each(function(){
+        let item = $(this).attr("data-copy-id");
+        copy = {};
+        copy.status = 'BORROWED';
+        copy.userId = parseInt(userid);
+        let copyid = parseInt(item);
+        fetch("/api/assets/copy/" + copyid, {
+            method: 'PUT',
+            headers: {'Content-type': 'application/json' },
+            body: JSON.stringify(copy)
+        }).then(response => {
+            if (response.ok) {
+                console.log("yay");
+                fetch("/api/cart/" + item, {
+                    method: 'DELETE'
+                }).then(response => {
+                    if (response.ok) {
+                        console.log("deleted " + item);
+                    }
+                })
+            }
+        })
+    });
+}
+
 $(document).ready(function () {
     /* clicky function hooks for buttons */
     $("#add-asset").click(function () {
@@ -277,6 +304,10 @@ $(document).ready(function () {
 
     $(".cart-remove-button").click(function() {
         removeItem($(this).attr('data-cart-id'));
+    })
+
+    $("#bookbag-checkout").click(function() {
+        checkout();
     })
 
     $(document).keyup(function(e){

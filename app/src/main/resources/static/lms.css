@@ -257,7 +257,8 @@ hr.invis {
 }
 
 .asset-copy-button,
-.cart-remove-button {
+.cart-remove-button,
+.copy-remove-button {
     cursor: pointer;
     font-size: 0.8rem;
     font-weight: 500;

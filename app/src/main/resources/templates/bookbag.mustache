@@ -4,12 +4,13 @@
     <p id="message" style="display:none;"></p>
 
     {{#user-cart}}
-    <ul>
-        <li id="cart-item-{{id}}" class="cart-item"><span class="cart-asset-title">{{asset.title}}</span> <button data-cart-id="{{id}}" class="cart-remove-button"><i class="fas fa-times"></i></button>
+    <ul id="bookbag-items">
+        <li id="cart-item-{{id}}" class="cart-item"><span class="cart-asset-title">{{asset.title}}</span> <button data-cart-id="{{id}}" data-copy-id={{copyId}} class="cart-remove-button"><i class="fas fa-times"></i></button>
         <br />
         <span class="tiny">ISBN: {{asset.isbn}}</span></li>
     </ul>
     {{/user-cart}}
+    {{#user-cart-count}}<button id="bookbag-checkout">Check out</button>{{/user-cart-count}}
     {{^user-cart-count}}Your bookbag is empty!{{/user-cart-count}}    
     </section>
 {{>footer}}

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import edu.brandeis.gps.rseg127.lms.entities.*;
 import edu.brandeis.gps.rseg127.lms.repos.*;
-import edu.brandeis.gps.rseg127.lms.services.CartService;
+import edu.brandeis.gps.rseg127.lms.services.*;
 
 @ControllerAdvice
 public class WebControllerAdvice {
@@ -25,10 +25,16 @@ public class WebControllerAdvice {
     UserRepo userRepo;
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     CartRepo cartRepo;
 
     @Autowired
     CartService cartService;
+
+    @Autowired
+    AssetCopyService assetCopyService;
 
     @ModelAttribute
     public void pullAuthData(HttpServletRequest request, Model model) {
@@ -47,10 +53,14 @@ public class WebControllerAdvice {
             List<Cart> cartList = new ArrayList<Cart>();
             cartList = cartService.getUserCart(loggedInUserId);
 
-            Integer cartCount = cartList.size();
-            model.addAttribute("user-cart-count", cartCount);
+            model.addAttribute("user-cart-count", cartList.size());
             model.addAttribute("user-cart", cartList);
 
+            // pull loan data for authenticated user
+            List<AssetCopyWithAsset> copyList = userService.getUserLoans(this.loggedInUserId);
+            System.out.println(copyList.toString());
+            model.addAttribute("user-loan-count", copyList.size());
+            model.addAttribute("user-loans", copyList);
         }
     }
 }

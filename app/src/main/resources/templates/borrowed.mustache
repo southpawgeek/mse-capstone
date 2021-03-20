@@ -2,12 +2,14 @@
     <section>
     <h2>My Loans</h2>
     <p id="message" style="display:none;"></p>
-    </section>
-    <h2>list goes here</h2>
-    <section>
-        <ul>
-            <li>book 1</li>
-            <li>book 2</li>
-        </ul>
+
+    {{#user-loans}}
+    <ul id="borrowed-items">
+        <li id="copy-item-{{assetCopy.id}}" class="copy-item"><span class="cart-asset-title">{{asset.title}}</span> <button data-copy-id="{{assetCopy.id}}" class="copy-remove-button">Return this item</button>
+        <br />
+        <span class="tiny">ISBN: {{asset.isbn}}</span></li>
+    </ul>
+    {{/user-loans}}
+    {{^user-loan-count}}You have no active loans!{{/user-loan-count}}    
     </section>
 {{>footer}}
