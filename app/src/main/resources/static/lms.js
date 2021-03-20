@@ -97,7 +97,8 @@ function refreshAssets() {
                     copies_total = data[key].count.stats.total;
                     var row = "<tr id='asset-" + data[key].id + "' class='asset-copy' data-asset-id='" + data[key].id + "'><td>" + data[key].title + "</td> <td>" + data[key].isbn + "</td> <td>" + data[key].callNumber + "</td><td><span class='asset-copies'>" + copies_total + "</span><button class='add-copy' value='" + data[key].id + "'>+</i></button></td>";
                     $("#assets").append(row);
-                    $("#asset-" + data[key].id).delegate('button', 'click', function () { addCopy(data[key].id); });
+                    $("#asset-" + data[key].id).delegate('button', 'click', function () { addCopy(data[key].id); 
+                    });
                 })
             })
     )
@@ -121,9 +122,26 @@ function viewAsset(id) {
                 let stats = data.count.stats;
                 let copies = data.count.copies;
 
-                $("#asset-modal-total").html(stats.total);
                 $.each(copies, function(key) {
-                    $("#asset-modal-copies").append("<li id='asset-copy-" + copies[key].id + "' class='asset-copy-item'><span class='asset-copy-status'>" + copies[key].status + "</span><button class='asset-copy-button' data-copy-id='" + copies[key].id + "'>Reserve this copy</button></li>");
+                    let available = false;
+                    if (copies[key].status === "NEW" || copies[key].status === "AVAILABLE") {
+                        available = true;
+                    }
+    
+                    $("#asset-modal-total").html(stats.total);
+    
+                    let copyhtml = "<li id='asset-copy-" + copies[key].id + "' class='asset-copy-item'><span class='asset-copy-status'>" + copies[key].status + "</span>";
+                    
+                    if (available) {
+                        copyhtml += "<button class='asset-copy-button' data-copy-id='" + copies[key].id + "'>Reserve this copy</button>";               
+                    }
+    
+                    copyhtml += "</li>";
+
+                    $("#asset-modal-copies").append(copyhtml);
+                    $("#asset-copy-" + copies[key].id)
+                        .delegate('button', 'click', function() { addItem(copies[key].id); 
+                        });
                 })
             }))
 }
@@ -199,7 +217,6 @@ function refreshUsers() {
 }
 
 function removeItem(id) {
-    //$("#cart-item-" + id + " button").fadeOut();
     $("#cart-item-" + id + " button").fadeOut();
     $("#cart-item-" + id + " .cart-asset-title").css({"text-decoration": "line-through"});
 
@@ -213,6 +230,27 @@ function removeItem(id) {
                 $("#user-cart-running-total").html(parseInt(count) - 1);              
             }
     })
+}
+
+function addItem(id) {
+    var item = {};
+    item.userId = $("#user-userid").val();
+    item.copyId = id;
+
+    console.log(item);
+    fetch("/api/cart", {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(item)
+    })
+        .then(response => {
+            if (response.ok) {
+                $("#asset-copy-" + id + " button").fadeOut();
+                $("#asset-copy-" + id + " .asset-copy-status").html('RESERVED');
+                let count = $("#user-cart-running-total").html();
+                $("#user-cart-running-total").html(parseInt(count) + 1);    
+            }
+        })
 }
 
 $(document).ready(function () {

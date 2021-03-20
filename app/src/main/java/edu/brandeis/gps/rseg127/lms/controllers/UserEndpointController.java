@@ -1,6 +1,5 @@
 package edu.brandeis.gps.rseg127.lms.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,12 +73,5 @@ public class UserEndpointController {
     @GetMapping(path = "/api/users/{id}/cart", produces = "application/json")
     public ResponseEntity<List<Cart>> getUserCart(@PathVariable(value = "id") Integer id) {
         return new ResponseEntity<>(cartService.getUserCart(id), HttpStatus.OK);
-    }
-
-    // break this out into CartController probably
-    @DeleteMapping(path = "/api/cart/{id}", produces = "application/json")
-    public ResponseEntity<String> deleteCartItem(@PathVariable(value = "id") Integer id) {
-        cartService.deleteCartItem(id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
