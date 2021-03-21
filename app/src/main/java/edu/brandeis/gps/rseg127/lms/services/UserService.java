@@ -45,7 +45,12 @@ public class UserService {
 
         for (AssetCopyWithAsset copy : copies) {
             String status = copy.getAssetCopy().getStatus();
-            if (status.equals("BORROWED") || status.equals("LATE")) {
+
+            if (status.equals("BORROWED")) {
+                filteredCopies.add(copy);
+            }
+            if (status.equals("LATE")) {
+                copy.setIsLate(true);
                 filteredCopies.add(copy);
             }
         }

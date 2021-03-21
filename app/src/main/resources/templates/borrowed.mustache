@@ -5,9 +5,14 @@
 
 
     <ul id="borrowed-items">{{#user-loan}}
-        <li id="copy-item-{{assetCopy.id}}" class="asset-copy-item"><span class="cart-asset-title">{{asset.title}}</span> <button id="return-{{assetCopy.id}}" data-copy-id="{{assetCopy.id}}" class="copy-return-button">Return this item</button>
-        <br />
-        <span class="tiny">ISBN: {{asset.isbn}}</span></li>
+        <li id="copy-item-{{assetCopy.id}}" class="{{#isLate}}asset-copy-late{{/isLate}} asset-copy-item">
+            <span class="cart-asset-title">{{asset.title}}</span> 
+            <button id="return-{{assetCopy.id}}" data-copy-id="{{assetCopy.id}}" class="copy-return-button">Return this item</button>
+            <br />
+            <span class="tiny"><strong>Due date:</strong> {{assetCopy.dueDate}} {{#isLate}}PAST DUE!{{/isLate}}</span>
+            <br />
+            <span class="tiny"><strong>ISBN:</strong> {{asset.isbn}}</span>
+        </li>
     {{/user-loan}}
     {{^user-loan-exists}}<li>You have no active loans!</li>{{/user-loan-exists}}
     </ul>

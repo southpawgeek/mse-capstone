@@ -7,4 +7,5 @@ import lombok.Setter;
 public class AssetCopyWithAsset {
     public Asset asset = new Asset();
     public AssetCopy assetCopy = new AssetCopy();
+    public Boolean isLate = false;
 }
