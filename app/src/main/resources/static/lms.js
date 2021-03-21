@@ -221,18 +221,23 @@ function refreshUsers() {
 
 function removeItem(id) {
     $("#cart-item-" + id + " button").fadeOut();
-    $("#cart-item-" + id + " .cart-asset-title").css({"text-decoration": "line-through"});
+    $("#cart-item-" + id + " .cart-asset-title").css({ "text-decoration": "line-through" });
+    $("#cart-item-" + id).slideUp();
 
     fetch("/api/cart/" + id, {
-    method: 'DELETE' })
+        method: 'DELETE'
+    })
         .then(response => {
             if (response.ok) {
-                $("#cart-item-" + id).slideUp();  
-
                 let count = $("#user-cart-running-total").html();
-                $("#user-cart-running-total").html(parseInt(count) - 1);              
+                $("#user-cart-running-total").html(parseInt(count) - 1);
+                return true;
             }
-    })
+        }).then(stillok => {
+            if (stillok) {
+                $("#cart-item-" + id).remove();
+            }
+        });
 }
 
 function addItem(id) {
@@ -256,31 +261,56 @@ function addItem(id) {
         })
 }
 
+// checkout means:
+// assetcopy is updated with userid + 'BORROWED' status
+// cart item is deleted
 function checkout() {
-    let userid = $("#user-userid").val();
-    $("#bookbag-items li button").each(function(){
-        let item = $(this).attr("data-copy-id");
+    $("#user-cart-running-total").html("0");
+    $("#bookbag-checkout").slideUp();
+    let userId = $("#user-userid").val();
+
+    $("#bookbag-items li button").each(function () {
+        let copyId = $(this).attr("data-copy-id");
+        let cartId = $(this).attr("data-cart-id");
+
+        // delete cart item
+        removeCartItem(cartId);
+
+        // make a copy object
         copy = {};
         copy.status = 'BORROWED';
-        copy.userId = parseInt(userid);
-        let copyid = parseInt(item);
-        fetch("/api/assets/copy/" + copyid, {
+        copy.userId = userId;
+
+        console.log(copyId + JSON.stringify(copy));
+
+        // update the copy
+        fetch("/api/assets/copy/" + copyId, {
             method: 'PUT',
             headers: {'Content-type': 'application/json' },
             body: JSON.stringify(copy)
         }).then(response => {
             if (response.ok) {
-                console.log("yay");
-                fetch("/api/cart/" + item, {
-                    method: 'DELETE'
-                }).then(response => {
-                    if (response.ok) {
-                        console.log("deleted " + item);
-                    }
-                })
+                let count = $("#user-loan-running-total").html();
+                $("#user-loan-running-total").html(parseInt(count) + 1);
             }
+
         })
     });
+}
+
+function removeCartItem(id) {
+    $("#cart-item-" + id).slideUp();
+    fetch("/api/cart/" + id, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (response.ok) {
+        }
+    })
+}
+
+function returnCopy(id) {
+
 }
 
 $(document).ready(function () {
@@ -311,6 +341,11 @@ $(document).ready(function () {
 
     $("#bookbag-checkout").click(function() {
         checkout();
+        $("#bookbag-items").append("<li>Checked out!</li>");
+    })
+
+    $(".copy-return-button").click(function () {
+        returnCopy($(this).attr('data-cart-id'));
     })
 
     $(document).keyup(function(e){

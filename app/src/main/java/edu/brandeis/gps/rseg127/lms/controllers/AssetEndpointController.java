@@ -72,15 +72,8 @@ public class AssetEndpointController {
 
     @PutMapping(consumes = "application/json", produces = "application/json", path = "/api/assets/copy/{id}")
     public ResponseEntity<AssetCopy> updateAssetCopy(@RequestBody AssetCopy assetCopy, @PathVariable Integer id) {
-        // pull up a copy of the current asset copy
-        AssetCopy currentAssetCopy = assetCopyService.getAssetCopy(id);
-        
-        // fill in the blanks with submitted data
-        currentAssetCopy.setUserId(assetCopy.getUserId());
-        currentAssetCopy.setStatus(assetCopy.getStatus());
-        //currentAssetCopy.setDueDate(assetCopy.getDueDate());
-
-        return new ResponseEntity<>(assetCopyService.updateAssetCopy(currentAssetCopy), HttpStatus.CREATED);
+        assetCopy.setAssetId(assetCopyService.getAssetCopy(id).getAssetId());
+        return new ResponseEntity<>(assetCopyService.updateAssetCopy(assetCopy), HttpStatus.CREATED);
     }
 
     @GetMapping(path="/api/assets/copy/{id}", produces="application/json")
