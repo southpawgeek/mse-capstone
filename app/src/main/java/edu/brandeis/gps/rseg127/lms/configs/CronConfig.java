@@ -17,7 +17,7 @@ public class CronConfig {
     @Autowired
     AssetCopyService assetCopyService;
 
-    @Scheduled(cron = "59 * * * * *")
+    @Scheduled(cron = "59 59 * * * *")
     public void markLateCopies() {
         List<AssetCopy> copyList = assetCopyService.getAssetCopyList();
         copyList.forEach(copy -> {
