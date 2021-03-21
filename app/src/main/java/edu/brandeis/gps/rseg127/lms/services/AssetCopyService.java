@@ -23,13 +23,13 @@ public class AssetCopyService {
     private AssetRepo assetRepo;
 
     public AssetCopy getAssetCopy(Integer id) {
-        return assetCopyRepo.getOne(id);
+        return assetCopyRepo.findById(id).get();
     }
 
     public AssetCopyListWithAsset getAssetCopyListWithAsset(Integer id) {
         AssetCopyListWithAsset copyList = new AssetCopyListWithAsset();
         copyList.setAssetCopyList(getByAssetId(id));
-        copyList.setAsset(assetRepo.getOne(id));
+        copyList.setAsset(assetRepo.findById(id).get());
         return copyList;
     }
 

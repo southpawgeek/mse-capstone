@@ -5,7 +5,7 @@
 
     {{#user-loan}}
     <ul id="borrowed-items">
-        <li id="copy-item-{{assetCopy.id}}" class="copy-item"><span class="cart-asset-title">{{asset.title}}</span> <button data-copy-id="{{assetCopy.id}}" class="copy-return-button">Return this item</button>
+        <li id="copy-item-{{assetCopy.id}}" class="copy-item"><span class="cart-asset-title">{{asset.title}}</span> <button id="return-{{assetCopy.id}}" data-copy-id="{{assetCopy.id}}" class="copy-return-button">Return this item</button>
         <br />
         <span class="tiny">ISBN: {{asset.isbn}}</span></li>
     </ul>

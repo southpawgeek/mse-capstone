@@ -21,7 +21,6 @@ import edu.brandeis.gps.rseg127.lms.services.AssetCopyService;
 import edu.brandeis.gps.rseg127.lms.services.AssetService;
 
 @RestController
-@Transactional
 public class AssetEndpointController {
     @Autowired
     private AssetService assetService;
@@ -70,9 +69,13 @@ public class AssetEndpointController {
         return new ResponseEntity<>(assetCopyService.createAssetCopy(assetCopy), HttpStatus.CREATED);
     }
 
+    @Transactional
     @PutMapping(consumes = "application/json", produces = "application/json", path = "/api/assets/copy/{id}")
     public ResponseEntity<AssetCopy> updateAssetCopy(@RequestBody AssetCopy assetCopy, @PathVariable Integer id) {
-        assetCopy.setAssetId(assetCopyService.getAssetCopy(id).getAssetId());
+        Integer assetId = assetCopyService.getAssetCopy(id).getAssetId();
+        assetCopy.setId(id);
+        assetCopy.setAssetId(assetId);
+
         return new ResponseEntity<>(assetCopyService.updateAssetCopy(assetCopy), HttpStatus.CREATED);
     }
 

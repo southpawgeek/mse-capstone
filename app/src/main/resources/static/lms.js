@@ -230,7 +230,8 @@ function removeItem(id) {
         .then(response => {
             if (response.ok) {
                 let count = $("#user-cart-running-total").html();
-                $("#user-cart-running-total").html(parseInt(count) - 1);
+                count--;
+                $("#user-cart-running-total").html(count);
                 return true;
             }
         }).then(stillok => {
@@ -256,14 +257,12 @@ function addItem(id) {
                 $("#asset-copy-" + id + " button").fadeOut();
                 $("#asset-copy-" + id + " .asset-copy-status").html('RESERVED');
                 let count = $("#user-cart-running-total").html();
-                $("#user-cart-running-total").html(parseInt(count) + 1);    
+                count++;
+                $("#user-cart-running-total").html(count);
             }
         })
 }
 
-// checkout means:
-// assetcopy is updated with userid + 'BORROWED' status
-// cart item is deleted
 function checkout() {
     $("#user-cart-running-total").html("0");
     $("#bookbag-checkout").slideUp();
@@ -291,7 +290,8 @@ function checkout() {
         }).then(response => {
             if (response.ok) {
                 let count = $("#user-loan-running-total").html();
-                $("#user-loan-running-total").html(parseInt(count) + 1);
+                count++;
+                $("#user-loan-running-total").html(count);
             }
 
         })
@@ -310,7 +310,28 @@ function removeCartItem(id) {
 }
 
 function returnCopy(id) {
+    console.log(id);
+    $("#return-" + id).prop('disabled', true).html('Returning... <i class="fas fa-circle-notch fa-spin"></i>');
 
+    copy = {};
+    copy.userId = '-1';
+    copy.status = 'AVAILABLE';
+
+    fetch("/api/assets/copy/" + id, {
+        method: 'PUT',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(copy)
+    }).then(response => {
+        if (response.ok) {
+            $("#copy-item-" + id).slideUp();
+            let count = $("#user-loan-running-total").html();
+            count--;
+            $("#user-loan-running-total").html(count);
+            if (count == 0) {
+                $("#borrowed-items").append("<li>You have no active loans!</li>");
+            }
+        }
+    })
 }
 
 $(document).ready(function () {
@@ -345,7 +366,7 @@ $(document).ready(function () {
     })
 
     $(".copy-return-button").click(function () {
-        returnCopy($(this).attr('data-cart-id'));
+        returnCopy($(this).attr('data-copy-id'));
     })
 
     $(document).keyup(function(e){
