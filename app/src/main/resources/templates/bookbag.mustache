@@ -10,7 +10,7 @@
         <span class="tiny">ISBN: {{asset.isbn}}</span></li>
     </ul>
     {{/user-cart}}
-    {{#user-cart-count}}<button id="bookbag-checkout">Check out</button>{{/user-cart-count}}
-    {{^user-cart-count}}Your bookbag is empty!{{/user-cart-count}}    
+    {{#user-cart-exists}}<button id="bookbag-checkout">Check out</button>{{/user-cart-exists}}
+    {{^user-cart-exists}}Your bookbag is empty!{{/user-cart-exists}}
     </section>
 {{>footer}}

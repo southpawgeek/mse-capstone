@@ -133,14 +133,17 @@ function viewAsset(id) {
                     let copyhtml = "<li id='asset-copy-" + copies[key].id + "' class='asset-copy-item'><span class='asset-copy-status'>" + copies[key].status + "</span>";
                     
                     if (available) {
-                        copyhtml += "<button class='asset-copy-button' data-copy-id='" + copies[key].id + "'>Reserve this copy</button>";               
+                        copyhtml += "<button class='asset-copy-button' data-copy-id='" + copies[key].id + "'>Reserve this copy</button>";
                     }
     
                     copyhtml += "</li>";
 
                     $("#asset-modal-copies").append(copyhtml);
                     $("#asset-copy-" + copies[key].id)
-                        .delegate('button', 'click', function() { addItem(copies[key].id); 
+                        .delegate('button', 'click', function () {
+                            $(this).html('Reserving... <i class="fas fa-circle-notch fa-spin"></i>');
+                            $(this).prop('disabled', true);
+                            addItem(copies[key].id);
                         });
                 })
             }))

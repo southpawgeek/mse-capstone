@@ -53,14 +53,26 @@ public class WebControllerAdvice {
             List<Cart> cartList = new ArrayList<Cart>();
             cartList = cartService.getUserCart(loggedInUserId);
 
-            model.addAttribute("user-cart-count", cartList.size());
+            Integer cartSize = cartList.size();
+            Boolean hasCart = false;
+            if (cartSize != 0) {
+                hasCart = true;
+            }
+            model.addAttribute("user-cart-exists", hasCart);
+            model.addAttribute("user-cart-count", cartSize);
             model.addAttribute("user-cart", cartList);
 
             // pull loan data for authenticated user
             List<AssetCopyWithAsset> copyList = userService.getUserLoans(this.loggedInUserId);
-            System.out.println(copyList.toString());
-            model.addAttribute("user-loan-count", copyList.size());
-            model.addAttribute("user-loans", copyList);
+
+            Integer loanSize = copyList.size();
+            Boolean hasLoan = false;
+            if (loanSize != 0) {
+                hasLoan = true;
+            }
+            model.addAttribute("user-loan-exists", hasLoan);
+            model.addAttribute("user-loan-count", loanSize);
+            model.addAttribute("user-loan", copyList);
         }
     }
 }
