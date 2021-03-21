@@ -19,6 +19,10 @@ public class AssetService {
     private AssetCopyRepo assetCopyRepo;
 
     public List<Asset> getAllAssets() {
+        return assetRepo.findAll();
+    }
+
+    public List<Asset> getAllAssetsWithCopies() {
         List<Asset> assets = assetRepo.findAll();
         for (Asset asset : assets) {
             CopyCount copyCount = new CopyCount(assetCopyRepo.findByAssetId(asset.getId()));
@@ -26,7 +30,7 @@ public class AssetService {
         }
         return assets;
     }
-
+    
     public Asset createAsset(Asset asset) {
         assetRepo.save(asset);
         AssetCopy assetCopy = new AssetCopy();

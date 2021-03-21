@@ -234,19 +234,16 @@ hr.invis {
     margin: 0;
 }
 
-.asset-copy-item {
-    height: 2rem;
-}
-
 .asset-item:hover {
     color: var(--lite-yellow);
     text-decoration: underline;
     cursor: pointer;
 }
 
-.cart-item {
+.cart-item, .asset-copy-item {
     font-size: 1rem;
     line-height: 1.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .asset-copy-status,

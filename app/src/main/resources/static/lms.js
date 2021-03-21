@@ -272,29 +272,11 @@ function checkout() {
         let copyId = $(this).attr("data-copy-id");
         let cartId = $(this).attr("data-cart-id");
 
+        // borrow the copy
+        borrowCopy(copyId);
+
         // delete cart item
         removeCartItem(cartId);
-
-        // make a copy object
-        copy = {};
-        copy.status = 'BORROWED';
-        copy.userId = userId;
-
-        console.log(copyId + JSON.stringify(copy));
-
-        // update the copy
-        fetch("/api/assets/copy/" + copyId, {
-            method: 'PUT',
-            headers: {'Content-type': 'application/json' },
-            body: JSON.stringify(copy)
-        }).then(response => {
-            if (response.ok) {
-                let count = $("#user-loan-running-total").html();
-                count++;
-                $("#user-loan-running-total").html(count);
-            }
-
-        })
     });
 }
 
@@ -305,6 +287,27 @@ function removeCartItem(id) {
     })
         .then(response => {
             if (response.ok) {
+        }
+    })
+}
+
+function borrowCopy(id) {
+    let userId = $("#user-userid").val();
+
+    copy = {};
+    copy.userId = userId;
+    copy.status = 'BORROWED';
+
+    fetch("/api/assets/copy/" + id, {
+        method: 'PUT',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(copy)
+    }).then(response => {
+        if (response.ok) {
+            $("#copy-item-" + id).slideUp();
+            let count = $("#user-loan-running-total").html();
+            count++;
+            $("#user-loan-running-total").html(count);
         }
     })
 }

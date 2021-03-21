@@ -45,17 +45,13 @@ public class CartService {
     }
 
     public void deleteCartItem(Integer id) {
-        Cart item = cartRepo.findById(id).orElse(new Cart());
-        AssetCopy copy = assetCopyRepo.findById(item.getCopyId()).orElse(new AssetCopy());
-        copy.setUserId(null);
-        copy.setStatus("AVAILABLE");
-        assetCopyRepo.save(copy);
         cartRepo.deleteById(id);
     }
 
+    // adding to bookbag automatically reserves the asset copy
     public Cart createCartItem(Cart item) {
         AssetCopy copy = assetCopyRepo.findById(item.getCopyId()).orElse(new AssetCopy());
-        copy.setUserId(null);
+        copy.setUserId(item.getUserId());
         copy.setStatus("RESERVED");
         assetCopyRepo.save(copy);
         return cartRepo.save(item);

@@ -34,7 +34,7 @@ public class WebController {
 
     @GetMapping("/assets")
     public String getAllAssets(Model model) {
-        List<Asset> assets = assetService.getAllAssets();
+        List<Asset> assets = assetService.getAllAssetsWithCopies();
         model.addAttribute("assets", assets);
         model.addAttribute("assets-page", true);
         return "assets";

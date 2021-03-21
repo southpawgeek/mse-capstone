@@ -31,6 +31,6 @@ public class Asset {
     private Set<Author> authors = new HashSet<>();
 
     // contains all copies and some count info
-    @javax.persistence.Transient
+    @Transient
     private CopyCount count;
 }
