@@ -378,6 +378,22 @@ $(document).ready(function () {
         }
     })
 
+    // ultra-basic filter
+    // https://www.w3schools.com/jquery/jquery_filters.asp
+    $("#asset-filter").on("keyup", function () {
+        let value = $(this).val().toLowerCase();
+        $("#assets tr").filter(
+            function () {
+                $(this)
+                    .toggle(
+                        $(this)
+                            .text()
+                            .toLowerCase()
+                            .indexOf(value) > -1)
+            }
+        );
+    })
+
     function closeModal() {
         $("#full-modal").fadeOut(250);
     }
