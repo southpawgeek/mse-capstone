@@ -11,6 +11,7 @@ import edu.brandeis.gps.rseg127.lms.entities.Cart;
 import edu.brandeis.gps.rseg127.lms.repos.AssetCopyRepo;
 import edu.brandeis.gps.rseg127.lms.repos.AssetRepo;
 import edu.brandeis.gps.rseg127.lms.repos.CartRepo;
+import edu.brandeis.gps.rseg127.lms.utils.DueDate;
 
 @Service
 public class CartService {
@@ -53,7 +54,14 @@ public class CartService {
         AssetCopy copy = assetCopyRepo.findById(item.getCopyId()).orElse(new AssetCopy());
         copy.setUserId(item.getUserId());
         copy.setStatus("RESERVED");
+
+        DueDate dueDate = new DueDate("RESERVED");
+        copy.setDueDate(dueDate.getDueDate());
         assetCopyRepo.save(copy);
         return cartRepo.save(item);
+    }
+
+    public Cart getByCopyId(Integer id) {
+        return cartRepo.findByCopyId(id);
     }
 }

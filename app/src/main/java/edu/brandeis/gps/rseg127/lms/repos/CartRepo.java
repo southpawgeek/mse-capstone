@@ -11,4 +11,7 @@ public interface CartRepo extends JpaRepository<Cart, Integer> {
 
     @Query("select c from Cart c where c.userId = ?1")
     List<Cart> findByUserId(Integer userId);
+
+    @Query("select c from Cart c where c.copyId = ?1")
+    Cart findByCopyId(Integer copyId);
 }

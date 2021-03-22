@@ -19,6 +19,7 @@ import edu.brandeis.gps.rseg127.lms.entities.Asset;
 import edu.brandeis.gps.rseg127.lms.entities.AssetCopy;
 import edu.brandeis.gps.rseg127.lms.services.AssetCopyService;
 import edu.brandeis.gps.rseg127.lms.services.AssetService;
+import edu.brandeis.gps.rseg127.lms.utils.DueDate;
 
 @RestController
 public class AssetEndpointController {
@@ -66,6 +67,9 @@ public class AssetEndpointController {
     // AssetCopy
     @PostMapping(consumes="application/json", produces="application/json", path="/api/assets/copy")
     public ResponseEntity<AssetCopy> createAssetCopy(@RequestBody AssetCopy assetCopy) {
+        // force uc
+        String status = assetCopy.getStatus().toUpperCase();
+        assetCopy.setStatus(status);
         return new ResponseEntity<>(assetCopyService.createAssetCopy(assetCopy), HttpStatus.CREATED);
     }
 
@@ -75,6 +79,10 @@ public class AssetEndpointController {
         Integer assetId = assetCopyService.getAssetCopy(id).getAssetId();
         assetCopy.setId(id);
         assetCopy.setAssetId(assetId);
+
+        // call utility class to set the correct due date for given status
+        DueDate dueDate = new DueDate(assetCopy.getStatus());
+        assetCopy.setDueDate(dueDate.getDueDate());
 
         return new ResponseEntity<>(assetCopyService.updateAssetCopy(assetCopy), HttpStatus.CREATED);
     }
