@@ -14,14 +14,15 @@
     <ul id="borrowed-items">{{#borrowed-items}}
         <li id="copy-item-{{copyId}}" class="{{status}} asset-copy-item">
             <span class="cart-asset-title">{{title}}</span> 
+            <br />
+            {{#username}}<span class="tiny" style="color:yellow;"><strong>Borrower: </strong>{{.}}</span>{{/username}}
+            <br />
             <span class="tiny">
                 <strong>Due date:</strong> {{dueDate}}</span>
             <br />
             <span class="tiny"><strong>ISBN:</strong> {{isbn}}</span>
-            {{#username}}<strong>Borrower: </strong>{{.}}{{/username}}
         </li>
         {{/borrowed-items}}
-
         {{^current-exists}}<li>No on-time loans.</li>{{/current-exists}}
     </ul>
 
@@ -29,13 +30,14 @@
     <ul id="late-items">{{#late-items}}
         <li id="copy-item-{{copyId}}" class="{{status}} asset-copy-item">
             <span class="cart-asset-title">{{title}}</span> 
-            <span class="tiny">
+            <br />
+            {{#username}}<span class="tiny" style="color:yellow;"><strong>Borrower: </strong>{{.}}</span>{{/username}}
+            <br />
+            <span class="tiny" style="color:orange;">
                 <strong>Due date:</strong> {{dueDate}}</span>
             <br />
             <span class="tiny"><strong>ISBN:</strong> {{isbn}}</span>
         </li>
-        {{#username}}<strong>Borrower: </strong>{{.}}{{/username}}
-
     {{/late-items}}
         {{^late-exists}}<li>No late loans.</li>{{/late-exists}}
 </ul>
