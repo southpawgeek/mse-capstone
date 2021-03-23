@@ -41,7 +41,6 @@ public class WebController {
     public String getAllAssets(Model model) {
         List<Asset> assets = assetService.getAllAssetsWithCopies();
         model.addAttribute("assets", assets);
-        model.addAttribute("assets-page", true);
         return "assets";
     }
 
@@ -49,8 +48,7 @@ public class WebController {
     public String getAllAssetsBrowse(Model model) {
         List<Asset> assets = assetService.getAllAssets();
         model.addAttribute("assets", assets);
-        model.addAttribute("browse-page", true);
-        return "assets";
+        return "browse";
     }
 
     @GetMapping("/borrowed")

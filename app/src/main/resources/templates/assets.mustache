@@ -1,5 +1,5 @@
 {{>header}}
-    {{#assets-page}}<section>
+    <section>
     <h2>Add New Asset</h2>
     <p id="message" style="display:none;"></p>
     <h3>Title *</h3>
@@ -11,7 +11,7 @@
     <p class="tiny">* Required</p>
     <hr class="invis" />
     <button id="add-asset">Add Asset</button>
-    </section>{{/assets-page}}
+    </section>
     <section>
         <h2>Asset List</h2>
         <input id="asset-filter" type="text" placeholder="Start typing to filter..."/>
@@ -20,28 +20,29 @@
                 <th>Title</th>
                 <th>ISBN</th>
                 <th>Call Number</th>
-                {{#assets-page}}<th>Copies</th>{{/assets-page}}
+                <th>Copies</th>
             </thead>
             <tbody>
-                {{#assets}}<tr id='asset-{{id}}' class='asset-item' data-asset-id='{{id}}'>
+                {{#assets}}<tr id='asset-{{id}}' class='asset-item-mod' data-asset-id='{{id}}'>
                 <td>{{title}}</td>
                 <td>{{isbn}}</td>
                 <td>{{callNumber}}</td>
-                {{#assets-page}}<td><span id="asset-total-{{id}}" class='asset-copies'>{{count.stats.total}}</span><button class="add-copy" value="{{id}}">+</button></td>{{/assets-page}}
+                <td><span id="asset-total-{{id}}" class='asset-copies'>{{count.stats.total}}</span></td>
                 {{/assets}}</tr>
             </tbody>
         </table>
     </section>
 
     <div id="full-modal" style="display:none;">
-    <div id="full-modal-content">
-        <button id="full-modal-close"><i class="fas fa-times"></i></button>
-        <h3 id="asset-modal-title-data"><span id="asset-modal-title"></span></h3>
-        <h4>ISBN: <span id="asset-modal-isbn"></span></h4>
-        <h5 id="asset-modal-total-text">Total copies: <span id="asset-modal-total">X</span></h5>
-        <ul id="asset-modal-copies">
-        <li>?</li>
-        </ul>    
-    </div>
+        <div id="full-modal-content">
+            <button id="full-modal-close"><i class="fas fa-times"></i></button>
+            <h3 id="asset-modal-title-data"><span id="asset-modal-title"></span></h3>
+            <h4>ISBN: <span id="asset-modal-isbn"></span></h4>
+            <h5 id="asset-modal-total-text">Total copies: <span id="asset-modal-total">X</span> <button id="add-copy" style="margin-right:1.2rem;">Add new copy &nbsp; <i class="fas fa-plus"></i></button></h5>
+            <hr class="divider"/>
+            <ul id="asset-modal-copies">
+            <li>?</li>
+            </ul>
+        </div>
     </div>
 {{>footer}}

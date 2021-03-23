@@ -70,7 +70,9 @@ function addCopy(id) {
                 .slideDown()
                 .delay(2000)
                 .slideUp(1000);
-    })
+        })
+    refreshAsset(id);
+    viewModAsset(id);
     return;
 }
 
@@ -142,6 +144,45 @@ function viewAsset(id) {
                         });
                 })
             }))
+}
+
+function viewModAsset(id) {
+    // cleanup prior data
+    $("#asset-modal-copies").slideUp().empty();
+    $("#asset-modal-total").html('Recalculating... <i class="fas fa-circle-notch fa-spin"></i>');
+    $("#add-copy").val(id);
+
+    fetch("/api/assets/" + id, {
+        method: 'GET'
+    })
+        .then(response => response.json()
+            .then(data => {
+                $("#full-modal").fadeIn(250);
+                $("#asset-modal-title").html(data.title);
+                $("#asset-modal-isbn").html(data.isbn);
+                let stats = data.count.stats;
+                let copies = data.count.copies;
+
+                $.each(copies, function(key) {
+                    $("#asset-modal-total").html(stats.total);
+    
+                    let copyhtml = "<li id='asset-copy-" + copies[key].id + "' class='asset-copy-item'><span class='asset-copy-status'>" + copies[key].status + "</span>";
+                    
+
+                    copyhtml += "<button class='del-copy' value='" + copies[key].id + "'><i class='fas fa-times'></i></button>";
+    
+                    copyhtml += "</li>";
+
+                    $("#asset-modal-copies").append(copyhtml);
+                    $("#asset-copy-" + copies[key].id)
+                        .delegate('button', 'click', function () {
+                            $(this).html('Deleting... <i class="fas fa-circle-notch fa-spin"></i>');
+                            $(this).prop('disabled', true);
+                            removeCopy(copies[key].id);
+                        });
+                })
+            }))
+    $("#asset-modal-copies").slideDown();
 }
 
 function addUser() {
@@ -232,6 +273,23 @@ function removeItem(id) {
                 $("#cart-item-" + id).remove();
             }
         });
+}
+
+function removeCopy(id) {
+    $("#asset-copy-" + id + " button").fadeOut();
+    $("#asset-copy-" + id + " .asset-copy-status").css({ "text-decoration": "line-through" });
+    $("#asset-copy-" + id).slideUp();
+
+    fetch("/api/assets/copy/" + id, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (response.ok) {
+                refreshAsset($("#add-copy").val());
+                viewModAsset($("#add-copy").val());
+                return true;
+            }
+        })
 }
 
 function addItem(id) {
@@ -338,12 +396,16 @@ $(document).ready(function () {
         addUser();
     })
 
-    $(".add-copy").click(function () {
+    $("#add-copy").click(function () {
         addCopy($(this).val());
     })
 
     $(".asset-item").click(function() {
         viewAsset($(this).attr('data-asset-id'));
+    })
+
+    $(".asset-item-mod").click(function() {
+        viewModAsset($(this).attr('data-asset-id'));
     })
 
     $("#full-modal-close").click(function() {

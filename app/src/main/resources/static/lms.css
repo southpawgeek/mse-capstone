@@ -184,6 +184,13 @@ button:active {
     background: var(--lite-yellow);
 }
 
+hr.divider {
+    width: 75%;
+    border: none;
+    border-bottom: 1px dashed rgba(255,255,255,0.1);
+    margin-top: 2rem;
+}
+
 hr.invis {
     border: none;
 }
@@ -234,7 +241,8 @@ hr.invis {
     margin: 0;
 }
 
-.asset-item:hover {
+.asset-item:hover,
+.asset-item-mod:hover {
     color: var(--lite-yellow);
     text-decoration: underline;
     cursor: pointer;
@@ -256,7 +264,9 @@ hr.invis {
 
 .asset-copy-button,
 .cart-remove-button,
-.copy-return-button {
+.copy-return-button,
+.del-copy,
+#add-copy {
     cursor: pointer;
     font-size: 0.8rem;
     font-weight: 500;
