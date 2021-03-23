@@ -76,6 +76,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, "/api/cart/*")
                 .hasAnyAuthority("PAT", "LIB", "ADM")
 
+
                 // patrons need put to checkout a copy
                 .antMatchers(HttpMethod.PUT, "/api/assets/copy/*")
                 .hasAnyAuthority("PAT", "LIB", "ADM")
