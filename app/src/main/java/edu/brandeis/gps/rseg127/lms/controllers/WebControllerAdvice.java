@@ -48,6 +48,7 @@ public class WebControllerAdvice {
             model.addAttribute("auth-initial", username.charAt(0));
             model.addAttribute("auth-username", loggedInUser);
             model.addAttribute("auth-userid", loggedInUserId);
+            model.addAttribute("auth-LIB",user.getUserType().equals("LIB") || user.getUserType().equals("ADM"));
 
             // pull cart data for authenticated user
             List<Cart> cartList = new ArrayList<Cart>();
