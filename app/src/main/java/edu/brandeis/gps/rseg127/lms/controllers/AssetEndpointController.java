@@ -55,7 +55,7 @@ public class AssetEndpointController {
 
     @GetMapping(path="/api/assets", produces="application/json")
     public ResponseEntity<List<Asset>> getAllAssets() {
-        return new ResponseEntity<>(assetService.getAllAssets(), HttpStatus.OK);
+        return new ResponseEntity<>(assetService.getAllAssetsWithCopies(), HttpStatus.OK);
     }
 
     @DeleteMapping(path="/api/assets/{id}", produces="application/json")
