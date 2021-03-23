@@ -1,7 +1,7 @@
 insert into user (username, user_type, password_hash, patron_id, first_name, email_address) values
-("admin", "ADM", "5f4dcc3b5aa765d61d8327deb882cf99", "A1234", "Administrator", "admin@example.com"),
-("librarian", "LIB", "5f4dcc3b5aa765d61d8327deb882cf99", "L2345", "Librarian", "librarian@example.com"),
-("patron", "PAT", "5f4dcc3b5aa765d61d8327deb882cf99", "P3456", "Patron", "patron@example.com")
+("admin", "ADM", "{noop}password", "ADM1234", "Administrator", "admin@example.com"),
+("librarian", "LIB", "{noop}password", "LIB2345", "Librarian", "librarian@example.com"),
+("patron", "PAT", "{noop}password", "PAT3456", "Patron", "patron@example.com")
 ;
 
 
@@ -23,3 +23,5 @@ values
     ("COM 005", "1401297099", "Swamp Thing"),
     ("ANI 003", "1119675928", "Raising Chickens For Dummies")
 ;
+
+-- this produces assets with no initial copies, so an admin would need to go in and add those
