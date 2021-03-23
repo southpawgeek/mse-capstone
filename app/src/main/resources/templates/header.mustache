@@ -37,6 +37,8 @@
                 <li><i class="fas fa-clock"></i> <a href="/borrowed">Loans</a> {{#user-loan-count}}
                 <span style="font-size: 0.7rem">(<span id="user-loan-running-total">{{.}}</span>)</span>{{/user-loan-count}}</li>
                 <!-- admin only stuff -->
+                {{#auth-LIB}}<li><i class="fas fa-toolbox"></i> <strong>Admin Tools</strong></li>{{/auth-LIB}}
+                {{#auth-LIB}}<li><i class="fas fa-clock"></i> <a href="/loans">All Loans</a></li>{{/auth-LIB}}
             {{#auth-LIB}}<li><i class="fas fa-book"></i> <a href="/assets">Assets</a></li>{{/auth-LIB}}
                 {{#auth-LIB}}<li><i class="fas fa-users"></i> <a href="/users">Users</a></li>{{/auth-LIB}}
             {{#auth-LIB}}<li><i class="fas fa-list-alt"></i> <a href="/audit-log">Audit Log</a></li>{{/auth-LIB}}

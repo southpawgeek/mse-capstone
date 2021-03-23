@@ -1,0 +1,43 @@
+{{>header}}
+    <section>
+    <h2>Current Loans</h2>
+    <p id="message" style="display:none;"></p>
+
+
+
+    <h4>Quick Stats</h4>
+    <ul>
+        <li>{{total-items}} total loans</li>
+        <li>{{total-late-items}} are late</li>
+    </ul>
+    <h3>On-time Loans</h3>
+    <ul id="borrowed-items">{{#borrowed-items}}
+        <li id="copy-item-{{copyId}}" class="{{status}} asset-copy-item">
+            <span class="cart-asset-title">{{title}}</span> 
+            <span class="tiny">
+                <strong>Due date:</strong> {{dueDate}}</span>
+            <br />
+            <span class="tiny"><strong>ISBN:</strong> {{isbn}}</span>
+            {{#username}}<strong>Borrower: </strong>{{.}}{{/username}}
+        </li>
+        {{/borrowed-items}}
+
+        {{^current-exists}}<li>No on-time loans.</li>{{/current-exists}}
+    </ul>
+
+    <h3>Late Loans</h3>
+    <ul id="late-items">{{#late-items}}
+        <li id="copy-item-{{copyId}}" class="{{status}} asset-copy-item">
+            <span class="cart-asset-title">{{title}}</span> 
+            <span class="tiny">
+                <strong>Due date:</strong> {{dueDate}}</span>
+            <br />
+            <span class="tiny"><strong>ISBN:</strong> {{isbn}}</span>
+        </li>
+        {{#username}}<strong>Borrower: </strong>{{.}}{{/username}}
+
+    {{/late-items}}
+        {{^late-exists}}<li>No late loans.</li>{{/late-exists}}
+</ul>
+    </section>
+{{>footer}}
