@@ -34,6 +34,7 @@
             <thead>
                 <th>ID</th>
                 <th>Username</th>
+                <th>User Type</th>
                 <th>Patron ID</th>
                 <th>Name</th>
                 <th>Email</th>
@@ -42,6 +43,7 @@
                 {{#users}}<tr>
                 <td>{{id}}</td>
                 <td>{{username}}</td>
+                    <td>{{userType}}</td>
                 <td>{{patronId}}</td>
                 <td>{{#lastName}}{{.}},{{/lastName}}{{firstName}} {{#middleName}}{{.}}{{/middleName}}</td>
                 <td>{{#emailAddress}}{{.}}{{/emailAddress}}</td>
