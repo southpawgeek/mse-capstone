@@ -2,11 +2,13 @@ package edu.brandeis.gps.rseg127.lms.configs;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.sql.DataSource;
@@ -57,15 +59,33 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
         http.csrf().disable()
-            .authorizeRequests()
+                .authorizeRequests()
+            
                 .antMatchers("/lms.css", "/lms.js", "/login", "/error")
-                    .permitAll()
-                .antMatchers("/api/**", "/assets", "/users", "/audit-log")
-                .hasRole("LIB")
-                .antMatchers("/api/**", "/assets", "/users", "/audit-log")
-                .hasRole("ADM")
-                .antMatchers("/","/browser","/bookbag","/loan")
-                .authenticated()
+                .permitAll()
+
+                // patrons need get access to view assets, bookbag
+                .antMatchers(HttpMethod.GET, "/api/assets/**", "/api/cart", "/api/authors/**")
+                .hasAnyAuthority("PAT", "LIB", "ADM")
+
+                // patrons need post to add to bookbag
+                .antMatchers(HttpMethod.POST, "/api/cart")
+                .hasAnyAuthority("PAT", "LIB", "ADM")
+
+                // patrons need delete to remove from bookbag
+                .antMatchers(HttpMethod.DELETE, "/api/cart/*")
+                .hasAnyAuthority("PAT", "LIB", "ADM")
+
+                // patrons need put to checkout a copy
+                .antMatchers(HttpMethod.PUT, "/api/assets/copy/*")
+                .hasAnyAuthority("PAT", "LIB", "ADM")
+
+                // librarians and admins can do whatever they want with the rest of the api
+                .antMatchers("/api/**", "/assets", "/users", "/audit-log", "/loans")
+                .hasAnyAuthority("LIB", "ADM")
+
+                .antMatchers("/","/browser","/bookbag", "/borrowed")
+                .hasAnyAuthority("PAT", "LIB", "ADM")
             .and()
                 .formLogin()
                     .loginPage("/login")
