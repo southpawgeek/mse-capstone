@@ -14,7 +14,6 @@ function addAsset() {
         body: JSON.stringify(mydata)
     })
         .then(data => {
-            console.log(data);
             if (data.ok) {
             $("#message")
                 .removeClass()
@@ -44,14 +43,12 @@ function addCopy(id) {
     var mydata = {};
     mydata.assetId = id;
     mydata.status = "NEW";
-    console.log(mydata);
     fetch("/api/assets/copy", {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(mydata)
     })
         .then(data => {
-        console.log(data);
         if (data.ok) {
         $("#message")
             .removeClass()
@@ -92,7 +89,6 @@ function refreshAssets() {
         .then(response => response.json()
             .then(data => {
                 $("#assets").empty();
-                console.log(data);
                 $.each(data, function (key) {
                     copies_total = data[key].count.stats.total;
                     var row = "<tr id='asset-" + data[key].id + "' class='asset-copy' data-asset-id='" + data[key].id + "'><td>" + data[key].title + "</td> <td>" + data[key].isbn + "</td> <td>" + data[key].callNumber + "</td><td><span class='asset-copies'>" + copies_total + "</span><button class='add-copy' value='" + data[key].id + "'>+</i></button></td>";
@@ -115,7 +111,6 @@ function viewAsset(id) {
     })
         .then(response => response.json()
             .then(data => {
-                console.log(data);
                 $("#full-modal").fadeIn(250);
                 $("#asset-modal-title").html(data.title);
                 $("#asset-modal-isbn").html(data.isbn);
@@ -170,14 +165,12 @@ function addUser() {
 /* this is really not something we'd do in production */
     mydata.patronId = user_type + Math.floor(Math.random() * 1000000);
 
-    console.log(mydata);
     fetch("/api/users", {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
         body: JSON.stringify(mydata)
     })
         .then(data => {
-            console.log(data);
             if (data.ok) {
             $("#message")
                 .removeClass()
@@ -246,7 +239,6 @@ function addItem(id) {
     item.userId = $("#user-userid").val();
     item.copyId = id;
 
-    console.log(item);
     fetch("/api/cart", {
         method: 'POST',
         headers: { 'Content-type': 'application/json' },
@@ -313,7 +305,6 @@ function borrowCopy(id) {
 }
 
 function returnCopy(id) {
-    console.log(id);
     $("#return-" + id).prop('disabled', true).html('Returning... <i class="fas fa-circle-notch fa-spin"></i>');
 
     copy = {};
@@ -382,7 +373,7 @@ $(document).ready(function () {
     // https://www.w3schools.com/jquery/jquery_filters.asp
     $("#asset-filter").on("keyup", function () {
         let value = $(this).val().toLowerCase();
-        $("#assets tr").filter(
+        $("#assets tbody tr").filter(
             function () {
                 $(this)
                     .toggle(
