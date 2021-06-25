@@ -1,35 +1,24 @@
-# RSEG0127_Spring2021
+# Capstone - Master of Software Engineering
+## January 13th, 2021 - March 23rd, 2021
 
-GitLab project for library system class project
+This was a 10-week course. Our assignment was to create a Library Management System. Users would be able to log in and reserve books. Librarians would log in to add new titles, and manage copies of books.
 
-## 2021-02-18
-To run the application locally...
+The group assignment was meant for 4-6 students. Due to low enrollment, it was only me and one other student. Because of this, we had to manage expectations regarding which features would be implemented. Some features were pushed to a theoretical future sprint. This was presented to the instructor along with the final application.
 
-1. Install MariaDB
-2. Run SQL files in this order:
-    1. ddl.sql
-    2. schema.sql
-    3. initial-data.sql
-3. `mvn clean install`
-4. `mvn spring-boot:run`
-5. Navigate to `localhost:8080` in a browser
+### Technologies used
+#### Back end
+[Java 11](https://openjdk.java.net/projects/jdk/11/)
+* [Project Lombok](https://projectlombok.org/)
+[Spring Boot](https://spring.io/projects/spring-boot)
+* Spring Data JPA
+* Spring Security
+[Maven](https://maven.apache.org/)
+[MariaDB](https://mariadb.com/)
+[Swagger](https://swagger.io/)
 
-## 2021-02-23
-### Setting up a local GitLab runner
-**These are macOS-specific instructions**
-* first, install [Homebrew](https://brew.sh/)
-
-1. `brew install gitlab-runner` in your terminal 
-2. in the sidebar, go to **Settings** (gear icon) > **CI/CD**
-    * _(NOT the CI/CD with the rocket icon)_
-3. expand **Runners** section
-4. under **Specific Runners**, go to **Set up a specific runner manually**
-5. run `gitlab-runner register` in your terminal
-6. fill in the blanks - use the URL/token in GitLab
-    * For **executor**, type `shell`
-
-### Testing the example script
-#### This will change in the future...
-1. cd to the top level directory of the project (`rseg0127_spring2021`)
-2. run `gitlab-runner exec shell deploy-prod` in your terminal
-
+#### Front end
+[Mustache templating](https://mustache.github.io/)
+[HTML5](https://www.w3.org/TR/html52/)
+[JavaScript ES6](https://262.ecma-international.org/6.0/)
+[jQuery](https://jquery.com/)
+[CSS](https://www.w3.org/Style/CSS/Overview.en.html)
