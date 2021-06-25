@@ -7,18 +7,16 @@ The group assignment was meant for 4-6 students. Due to low enrollment, it was o
 
 ### Technologies used
 #### Back end
-[Java 11](https://openjdk.java.net/projects/jdk/11/)
+* [Java 11](https://openjdk.java.net/projects/jdk/11/)
 * [Project Lombok](https://projectlombok.org/)
-[Spring Boot](https://spring.io/projects/spring-boot)
-* Spring Data JPA
-* Spring Security
-[Maven](https://maven.apache.org/)
-[MariaDB](https://mariadb.com/)
-[Swagger](https://swagger.io/)
+* [Spring Boot](https://spring.io/projects/spring-boot)
+* [Maven](https://maven.apache.org/)
+* [MariaDB](https://mariadb.com/)
+* [Swagger](https://swagger.io/)
 
 #### Front end
-[Mustache templating](https://mustache.github.io/)
-[HTML5](https://www.w3.org/TR/html52/)
-[JavaScript ES6](https://262.ecma-international.org/6.0/)
-[jQuery](https://jquery.com/)
-[CSS](https://www.w3.org/Style/CSS/Overview.en.html)
+* [Mustache templating](https://mustache.github.io/)
+* [HTML5](https://www.w3.org/TR/html52/)
+* [JavaScript ES6](https://262.ecma-international.org/6.0/)
+* [jQuery](https://jquery.com/)
+* [CSS](https://www.w3.org/Style/CSS/Overview.en.html)
